@@ -1,0 +1,35 @@
+/* src/components/pages/NotFoundPage/NotFoundPage.css */
+.not-found-page {
+    text-align: center;
+    padding: 80px 20px;
+    background-color: var(--background-color-main);
+    color: var(--text-color);
+}
+
+.not-found-page h1 {
+    font-size: 48px;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.not-found-page p {
+    font-size: 20px;
+    color: var(--text-color);
+    margin-bottom: 30px;
+}
+
+.not-found-page .ki-button-blue {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 50px;
+    background-color: var(--button-blue-bg);
+    color: var(--button-text);
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.not-found-page .ki-button-blue:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}

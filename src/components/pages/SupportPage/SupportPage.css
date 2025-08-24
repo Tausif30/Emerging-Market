@@ -1,0 +1,78 @@
+/* src/components/pages/SupportPage/SupportPage.css */
+.support-page {
+    text-align: center;
+    background-color: var(--background-color-main);
+    color: var(--text-color);
+}
+
+.support-page h1 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.support-page .page-description {
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.support-section {
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 30px;
+    margin: 30px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    text-align: left;
+}
+
+.support-section h2 {
+    font-size: 28px;
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.faq-item h3 {
+    font-size: 20px;
+    color: var(--secondary-color);
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.faq-item p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.support-section p {
+    font-size: 16px;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .support-section {
+        margin: 20px auto;
+        padding: 20px;
+    }
+    .support-page .page-description {
+        padding: 0 20px;
+    }
+}

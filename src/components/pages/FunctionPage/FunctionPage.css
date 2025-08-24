@@ -1,0 +1,64 @@
+/* src/components/pages/FunctionPage/FunctionPage.css */
+.function-page {
+    text-align: center;
+    background-color: var(--background-color-main);
+    color: var(--text-color);
+}
+
+.function-page h1 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.function-page .page-description {
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 0 50px;
+    margin-top: 40px;
+}
+
+.feature-card {
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card h3 {
+    font-size: 22px;
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+    .features-grid {
+        padding: 0 20px;
+        grid-template-columns: 1fr;
+    }
+    .function-page .page-description {
+        padding: 0 20px;
+    }
+}

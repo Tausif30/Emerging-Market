@@ -1,0 +1,127 @@
+/* src/App.css */
+html, body {
+    scroll-behavior: smooth; /* Added for smooth scrolling */
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body.light-theme {
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+body.dark-theme {
+    background-color: #2c2c2c;
+    color: #f0f0f0;
+}
+
+.layout-container {
+    width: 100%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    background-color: var(--background-color-main);
+}
+
+.main-content {
+    min-height: calc(100vh - 120px);
+}
+
+/* Theme variables */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #e8590c;
+    --text-color-light: #333;
+    --text-color-dark: #f0f0f0;
+    --background-color-light: #f7f7f7;
+    --background-color-dark: #2c2c2c;
+    --card-background-light: #ffffff;
+    --card-background-dark: #3a3a3a;
+    --border-color-light: #eee;
+    --border-color-dark: #555;
+    --hero-background-light: #e9f5ff;
+    --hero-background-dark: #4a4a4a;
+}
+
+.light-theme {
+    --text-color: var(--text-color-light);
+    --background-color-main: var(--background-color-light);
+    --card-background: var(--card-background-light);
+    --border-color: var(--border-color-light);
+    --hero-background: var(--hero-background-light);
+    --header-bg: #fff;
+    --header-top-bg: #007bff;
+    --header-text: #555;
+    --header-link-hover: #007bff;
+    --button-blue-bg: #007bff;
+    --button-orange-bg: #e8590c;
+    --button-text: #fff;
+}
+
+.dark-theme {
+    --text-color: var(--text-color-dark);
+    --background-color-main: var(--background-color-dark);
+    --card-background: var(--card-background-dark);
+    --border-color: var(--border-color-dark);
+    --hero-background: var(--hero-background-dark);
+    --header-bg: #3a3a3a;
+    --header-top-bg: #0056b3;
+    --header-text: #ccc;
+    --header-link-hover: #82c2ff;
+    --button-blue-bg: #0056b3;
+    --button-orange-bg: #c14d0a;
+    --button-text: #fff;
+}
+
+/* General page styling */
+.page-wrapper {
+    padding: 30px;
+    background-color: var(--background-color-main);
+    color: var(--text-color);
+    min-height: 500px;
+}
+
+.page-wrapper h1 {
+    font-size: 36px;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.page-wrapper p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Base styles for buttons and forms across pages */
+.ki-button-blue,
+.ki-button-orange {
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s, background-color 0.3s, color 0.3s;
+}
+
+.ki-button-blue {
+    background-color: var(--button-blue-bg);
+    color: var(--button-text);
+}
+
+.ki-button-orange {
+    background-color: var(--button-orange-bg);
+    color: var(--button-text);
+}
+
+.ki-button-blue:hover,
+.ki-button-orange:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
