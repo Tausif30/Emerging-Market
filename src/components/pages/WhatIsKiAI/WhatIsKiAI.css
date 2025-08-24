@@ -303,3 +303,39 @@
         padding: 40px 0;
     }
 }
+
+/* Mobile-specific styling for links and buttons */
+@media (max-width: 768px) {
+    .ki-main .ki-links {
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+    }
+    
+    .ki-main .ki-link-item {
+        margin-right: 15px;
+        margin-left: 15px;
+    }
+    
+    .ki-main .ki-buttons {
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .ki-main-text {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .ki-main .ki-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .ki-main .ki-link-item {
+        margin: 0;
+        text-align: center;
+    }
+}
