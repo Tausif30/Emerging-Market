@@ -46,15 +46,15 @@
 
 .ki-links {
     display: flex;
+    flex-direction: column;
     margin-top: 20px;
-    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .ki-link-item {
     font-size: 18px;
     color: var(--text-color);
-    margin-right: 30px;
-    margin-bottom: 10px; /* For wrapping */
+    margin-bottom: 5px;
 }
 
 .ki-buttons {
