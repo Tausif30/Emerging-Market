@@ -45,7 +45,7 @@ const Header = () => {
             onlineConsultation: 'オンライン相談',
             themeSwitch: 'テーマ',
             langSwitch: '言語',
-            navWhatiskiai: 'KiAIとは？',
+            navWhatiskiai: 'KiAIとは?',
             navPricingplans: '料金・プラン',
             navFunction: '機能',
             navCasestudies: '導入事例',
@@ -65,6 +65,7 @@ const Header = () => {
             if (window.innerWidth > 992) {
                 setIsMobileMenuOpen(false);
                 setOpenSubmenu(null);
+                document.body.classList.remove('mobile-menu-open');
             }
         };
 
@@ -73,6 +74,7 @@ const Header = () => {
         // Clean up event listener on component unmount
         return () => {
             window.removeEventListener('resize', handleResize);
+            document.body.classList.remove('mobile-menu-open');
         };
     }, []);
 
@@ -91,7 +93,7 @@ const Header = () => {
             // Hide header when scrolling down and not at the top
             else if (currentScrollY > lastScrollY && currentScrollY > 100) {
                 setIsVisible(false);
-                setIsMobileMenuOpen(false); // Close mobile menu when hiding header
+                // Don't close mobile menu on scroll - let user control it manually
             }
             
             setLastScrollY(currentScrollY);
@@ -109,7 +111,15 @@ const Header = () => {
     };
 
     const toggleMobileMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen);
+        const newMenuState = !isMobileMenuOpen;
+        setIsMobileMenuOpen(newMenuState);
+        
+        // Prevent body scroll when mobile menu is open
+        if (newMenuState) {
+            document.body.classList.add('mobile-menu-open');
+        } else {
+            document.body.classList.remove('mobile-menu-open');
+        }
     };
 
     const toggleSubmenu = (menuId) => {

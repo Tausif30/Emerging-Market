@@ -1,6 +1,6 @@
 .section-navigation {
     position: fixed;
-    top: 120px; /* Position directly below the main header */
+    top: 115px;
     left: 0;
     right: 0;
     background-color: rgba(255, 255, 255, 0.95);
@@ -11,6 +11,7 @@
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     transform: translateY(-100%);
     opacity: 0;
+    margin-top: 0;
 }
 
 .section-nav-visible {
@@ -78,10 +79,55 @@
     border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
+[data-theme="dark"] .section-nav-item {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+}
+
+[data-theme="dark"] .section-nav-item:hover {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .section-nav-title {
+    color: #ffffff;
+}
+
+/* Additional dark theme support with body class and CSS variables */
+body.dark-theme .section-navigation,
+body[data-theme="dark"] .section-navigation,
+.dark .section-navigation {
+    background-color: rgba(30, 30, 30, 0.95);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .section-nav-item,
+body[data-theme="dark"] .section-nav-item,
+.dark .section-nav-item {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    background-color: transparent;
+}
+
+body.dark-theme .section-nav-item:hover,
+body[data-theme="dark"] .section-nav-item:hover,
+.dark .section-nav-item:hover {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+body.dark-theme .section-nav-title,
+body[data-theme="dark"] .section-nav-title,
+.dark .section-nav-title {
+    color: #ffffff;
+}
+
 /* Mobile responsiveness */
 @media (max-width: 992px) {
     .section-navigation {
-        top: 100px; /* Adjust for mobile header height */
+        top: 59px;
     }
 }
 

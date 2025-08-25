@@ -9,6 +9,7 @@ const SectionNavigation = () => {
 
     const translations = {
         en: {
+            quickNavigation: 'Quick Navigation',
             informationGathering: 'Information Gathering',
             improvingEfficiency: 'Improving Efficiency',
             riskMitigation: 'Risk Mitigation',
@@ -16,6 +17,7 @@ const SectionNavigation = () => {
             leveragingData: 'Leveraging Data'
         },
         ja: {
+            quickNavigation: 'クイックナビゲーション',
             informationGathering: '情報収集',
             improvingEfficiency: '効率向上',
             riskMitigation: 'リスク軽減',
@@ -67,7 +69,7 @@ const SectionNavigation = () => {
     return (
         <nav className={`section-navigation ${isVisible ? 'section-nav-visible' : 'section-nav-hidden'}`}>
             <div className="section-nav-content">
-                <div className="section-nav-title">Quick Navigation</div>
+                <div className="section-nav-title">{t.quickNavigation}</div>
                 <div className="section-nav-items">
                     {sections.map((section) => (
                         <button

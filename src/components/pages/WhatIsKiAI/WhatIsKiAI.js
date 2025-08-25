@@ -12,8 +12,7 @@ const WhatIsKiAI = () => {
             Title: 'What is Emerging Market Information Gathering?',
             Subtitle: 'Domestic Share No.1 (JP)',
             Tagline: 'KiAI',
-            Description1: 'Learn about "emerging market information" in 3 minutes',
-            Description2: 'Experience "KiAI"',
+            Description1: 'Learn about emerging market information in 3 minutes',
             button1: 'Download materials',
             button2: 'Try it for free',
             introText: 'Emerging market information gathering is a key process that enables businesses to...',
@@ -33,7 +32,6 @@ const WhatIsKiAI = () => {
             Subtitle: '国内シェアNo.1',
             Tagline: 'KiAI',
             Description1: '「新興国情報」を3分で学ぶ',
-            Description2: '「KiAI」を体験する',
             button1: '資料をダウンロード',
             button2: '無料で試す',
             introText: '新興国の情報収集は、企業が成長を加速させるために不可欠なプロセスです...',
@@ -62,7 +60,6 @@ const WhatIsKiAI = () => {
                     <h1 className="ki-main-title">{t.Title}</h1>
                     <div className="ki-links">
                         <span className="ki-link-item">{t.Description1}</span>
-                        <span className="ki-link-item">{t.Description2}</span>
                     </div>
                     <div className="ki-buttons">
                         <button className="ki-button-blue">{t.button1}</button>
