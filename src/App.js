@@ -11,7 +11,7 @@ import SupportPage from './components/pages/SupportPage/SupportPage';
 import BlogPage from './components/pages/BlogPage/BlogPage';
 import InformationPage from './components/pages/InformationPage/InformationPage';
 import RequestForPage from './components/pages/RequestForPage/RequestForPage';
-import NotFoundPage from './components/pages/NotFoundPage/NotFoundPage';
+import UnderConstruction from './components/pages/UnderConstruction/UnderConstruction';
 import './App.css'; 
 
 const App = () => {
@@ -30,7 +30,7 @@ const App = () => {
                             <Route path="/blog" element={<BlogPage />} />
                             <Route path="/information" element={<InformationPage />} />
                             <Route path="/request-for" element={<RequestForPage />} />
-                            <Route path="*" element={<NotFoundPage />} />
+                            <Route path="*" element={<UnderConstruction />} />
                         </Routes>
                     </Layout>
                 </Router>

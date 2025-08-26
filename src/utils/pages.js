@@ -8,7 +8,7 @@ const pages = [
     { name: 'Blog', path: '/blog', anchorable: true, id: 'blog' },
     { name: 'Information', path: '/information', anchorable: true, id: 'information' },
     { name: 'Request for', path: '/request-for', anchorable: true, id: 'request-for' },
-    { name: 'Not Found', path: '*', anchorable: false, id: 'not-found' }, // Catch-all for 404
+    { name: 'Under Construction', path: '*', anchorable: false, id: 'under-construction' }, // Catch-all for 404
 ];
 
 // Map for quick lookup by ID - useful for translations

@@ -12,9 +12,9 @@ const WhatIsKiAI = () => {
     const translations = {
         en: {
             Title: 'What is Emerging Market Information Gathering?',
-            Subtitle: 'Domestic Share No.1 (JP)',
+            Subtitle: 'No.1 AI Data Analytics for Emerging Markets',
             Tagline: 'KiAI',
-            Description1: 'Learn about emerging market information in 3 minutes',
+            Description1: 'Learn about emerging market through the help of AI.',
             button1: 'Download materials',
             button2: 'Try it for free',
             introText: 'Emerging market information gathering is a key process that enables businesses to...',

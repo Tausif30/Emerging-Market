@@ -1,0 +1,70 @@
+.under-construction-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 40px 20px;
+    background-color: var(--background-color-main);
+    color: var(--primary-color);
+}
+
+.under-construction-page h1 {
+    font-size: 48px;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.under-construction-page p {
+    font-size: 20px;
+    color: var(--text-color);
+    margin-bottom: 30px;
+    max-width: 600px;
+}
+
+.under-construction-page .ki-button-blue {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 50px;
+    background-color: var(--button-blue-bg);
+    color: var(--button-text);
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.2s;
+    margin-top: 30px;
+}
+
+.under-construction-page .ki-button-blue:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+/* Construction icon styling */
+.construction-icon {
+    font-size: 6rem;
+    color: var(--primary-color, #007bff);
+    margin-bottom: 2rem;
+    animation: bounce 2s infinite;
+}
+
+/* Bounce animation for construction icon */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Dark theme support for construction icon */
+[data-theme="dark"] .construction-icon,
+body.dark-theme .construction-icon,
+body[data-theme="dark"] .construction-icon,
+.dark .construction-icon {
+    color: var(--primary-color, #4da3ff);
+}

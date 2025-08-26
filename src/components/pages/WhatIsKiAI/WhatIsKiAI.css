@@ -637,108 +637,55 @@
     margin-top: 0;
 }
 
-/* Responsive design for main section */
+/* Specific styling for section 5 data image - larger size */
+#leveraging-data .ki-section-image {
+    flex: 0 0 320px;
+}
+
+#leveraging-data .ki-section-image img {
+    max-width: 320px;
+}
+
+/* Responsive adjustments for larger data image */
 @media (max-width: 992px) {
-    .ki-main {
-        gap: 40px;
-        padding: 60px 30px;
-        min-height: 35vh;
-    }
-    
-    .ki-main-image {
-        flex: 0 0 320px;
-        max-width: 320px;
-    }
-    
-    .ki-main-tagline {
-        font-size: 2.5rem;
-    }
-    
-    .ki-main-title {
-        font-size: 1.8rem;
-    }
-    
-    .ki-section-image {
-        flex: 0 0 200px;
-        max-width: 200px;
-        margin-top: 40px;
+    #leveraging-data .ki-section-image {
+        flex: 0 0 280px;
+        max-width: 280px;
     }
 }
 
 @media (max-width: 768px) {
-    .ki-main {
-        flex-direction: column;
-        text-align: center;
-        padding: 50px 20px;
-        gap: 25px;
-        min-height: 30vh;
-    }
-    
-    .ki-main-text {
-        padding-right: 0;
-    }
-    
-    .ki-main-image {
-        justify-content: center;
-        max-width: 280px;
-        flex: none;
-    }
-    
-    .ki-main-tagline {
-        font-size: 2rem;
-    }
-    
-    .ki-main-title {
-        font-size: 1.5rem;
-    }
-    
-    .ki-main-subtitle {
-        font-size: 14px;
-    }
-    
-    .ki-section-with-image {
-        padding: 40px 20px;
-    }
-    
-    .ki-section-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 25px;
-    }
-    
-    .ki-section-image {
-        justify-content: center;
-        max-width: 180px;
-        flex: none;
-        margin-top: 20px;
-    }
-    
-    .ki-section-text {
-        padding-right: 0;
-        text-align: left;
+    #leveraging-data .ki-section-image {
+        max-width: 240px;
     }
 }
 
 @media (max-width: 480px) {
-    .ki-main {
-        padding: 40px 15px;
-        min-height: 25vh;
+    #leveraging-data .ki-section-image {
+        max-width: 200px;
     }
-    
-    .ki-main-image {
-        max-width: 240px;
-    }
-    
-    .ki-main-tagline {
-        font-size: 1.8rem;
-    }
-    
-    .ki-main-title {
-        font-size: 1.3rem;
-    }
-    
+}
+
+/* Mobile centering for section images */
+@media (max-width: 768px) {
     .ki-section-image {
-        max-width: 150px;
-        margin-top: 15px;
+        align-self: center;
+    }
+    
+    #leveraging-data .ki-section-image {
+        justify-content: center;
+        align-self: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .ki-section-image {
+        justify-content: center;
+        align-self: center;
+    }
+    
+    #leveraging-data .ki-section-image {
+        justify-content: center;
+        align-self: center;
     }
 }
