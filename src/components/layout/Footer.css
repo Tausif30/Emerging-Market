@@ -1,6 +1,6 @@
 /* src/components/layout/Footer.css */
-.ki-footer {
-    background-color: var(--card-background); /* Adjust to theme */
+.footer {
+    background-color: var(--header-bg); /* Adjust to theme */
     color: var(--text-color);
     text-align: center;
     padding: 20px;

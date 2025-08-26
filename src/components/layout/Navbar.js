@@ -15,9 +15,6 @@ const NavbarDropdown = ({ mainTopic, isMobile = false, closeMobileMenu }) => {
                 { name: 'KiAI Technology', path: '/what-is-kiai/tech' },
             ],
             'Pricing and Plans': [
-                { name: 'Pricing Tiers', path: '/pricing-plans/tiers' },
-                { name: 'Feature Comparison', path: '/pricing-plans/compare' },
-                { name: 'Custom Plans', path: '/pricing-plans/custom' },
             ],
             'Function': [
                 { name: 'Data Sources', path: '/function/data' },
@@ -32,14 +29,12 @@ const NavbarDropdown = ({ mainTopic, isMobile = false, closeMobileMenu }) => {
             'Support': [
                 { name: 'FAQs', path: '/support/faq' },
                 { name: 'Contact Form', path: '/support/contact' },
-                { name: 'Documentation', path: '/support/docs' },
             ],
             'Blog': [
                 { name: 'Latest Articles', path: '/blog/latest' },
                 { name: 'Trends', path: '/blog/trends' },
                 { name: 'News & Events', path: '/blog/news' },
             ],
-            // 'Information' and 'Request for' typically don't have sub-menus
         },
         ja: {
             'KiAIとは？': [

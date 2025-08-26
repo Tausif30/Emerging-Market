@@ -18,7 +18,7 @@ body.light-theme {
 }
 
 body.dark-theme {
-    background-color: #2c2c2c;
+    background-color: #1d1f20;
     color: #f0f0f0;
 }
 
@@ -41,7 +41,7 @@ body.dark-theme {
     --background-color-light: #f7f7f7;
     --background-color-dark: #2c2c2c;
     --card-background-light: #ffffff;
-    --card-background-dark: #3a3a3a;
+    --card-background-dark: #181a1b;
     --border-color-light: #eee;
     --border-color-dark: #555;
     --hero-background-light: #e9f5ff;
@@ -53,7 +53,7 @@ body.dark-theme {
     --background-color-main: var(--background-color-light);
     --card-background: var(--card-background-light);
     --border-color: var(--border-color-light);
-    --hero-background: var(--hero-background-light);
+    --main-background: var(--main-background-light);
     --header-bg: #fff;
     --header-top-bg: #007bff;
     --header-text: #555;
@@ -68,8 +68,8 @@ body.dark-theme {
     --background-color-main: var(--background-color-dark);
     --card-background: var(--card-background-dark);
     --border-color: var(--border-color-dark);
-    --hero-background: var(--hero-background-dark);
-    --header-bg: #3a3a3a;
+    --main-background: var(--main-background-dark);
+    --header-bg: #181a1b;
     --header-top-bg: #0056b3;
     --header-text: #ccc;
     --header-link-hover: #82c2ff;
