@@ -1,113 +1,88 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { LanguageContext } from '../../contexts/LanguageContext';
-import pages from '../../utils/pages';
 import './Footer.css';
+import logoImage from './assets/Logo.png';
 
 const Footer = () => {
     const { language } = useContext(LanguageContext);
 
     const translations = {
         en: {
-            company: 'KiAI Fund',
-            rights: 'All rights reserved.',
-            mainPages: 'Main Pages',
-            services: 'Services',
-            resources: 'Resources',
+            tagline: 'Intelligence for a New Era',
             support: 'Support',
-            navWhatiskiai: 'What is KiAI?',
-            navPricingplans: 'Pricing and Plans',
-            navFunction: 'Function',
-            navCasestudies: 'Case studies',
-            navSupport: 'Support',
-            navBlog: 'Blog',
-            navInformation: 'Information',
-            navRequestfor: 'Request for'
+            updates: 'Updates',
+            faqs: 'FAQs',
+            company: 'Company',
+            aboutUs: 'About Us',
+            inquiries: 'Inquiries',
+            legal: 'Legal',
+            termsOfUse: 'Terms of Use',
+            privacyPolicy: 'Privacy Policy',
+            commercialTransactions: 'Notation based on the Act on Specified Commercial Transactions',
+            copyright: '© 2025,KiAI'
         },
         ja: {
-            company: 'KiAI Fund',
-            rights: 'すべての権利は保護されています。',
-            mainPages: 'メインページ',
-            services: 'サービス',
-            resources: 'リソース',
+            tagline: '新時代のインテリジェンス',
             support: 'サポート',
-            navWhatiskiai: 'KiAIとは？',
-            navPricingplans: '料金・プラン',
-            navFunction: '機能',
-            navCasestudies: '導入事例',
-            navSupport: 'サポート',
-            navBlog: 'ブログ',
-            navInformation: 'インフォメーション',
-            navRequestfor: '資料請求'
+            updates: 'アップデート',
+            faqs: 'よくある質問',
+            company: '会社情報',
+            aboutUs: '私たちについて',
+            inquiries: 'お問い合わせ',
+            legal: '法的事項',
+            termsOfUse: '利用規約',
+            privacyPolicy: 'プライバシーポリシー',
+            commercialTransactions: '特定商取引法に基づく表記',
+            copyright: '© 2025,KiAI'
         }
     };
 
     const t = translations[language];
-    const navLinks = pages.filter(page => page.anchorable && page.id !== 'not-found');
-
-    // Group pages by category for sitemap
-    const sitemapSections = {
-        mainPages: navLinks.filter(page => ['what-is-kiai', 'pricing-plans'].includes(page.id)),
-        services: navLinks.filter(page => ['function', 'case-studies'].includes(page.id)),
-        resources: navLinks.filter(page => ['blog', 'information'].includes(page.id)),
-        support: navLinks.filter(page => ['support', 'request-for'].includes(page.id))
-    };
 
     return (
-        <footer className="footer">
-            <div className="footer-content">
-                <div className="footer-company-info">
-                    <h3>{t.company}</h3>
-                    <p>&copy; 2024 {t.company}. {t.rights}</p>
+        <footer className="ki-footer">
+            <div className="ki-footer-content">
+                {/* Logo and Tagline Section */}
+                <div className="ki-footer-brand">
+                    <Link to="/what-is-kiai" className="ki-footer-logo-link">
+                        <img src={logoImage} alt="KiAI Logo" className="ki-footer-logo" />
+                    </Link>
+                    <p className="ki-footer-tagline">{t.tagline}</p>
                 </div>
 
-                <div className="footer-section sitemap-section">
-                    <div className="sitemap-grid">
-                        <div className="sitemap-column">
-                            <h5>{t.mainPages}</h5>
-                            <div className="sitemap-links">
-                                {sitemapSections.mainPages.map((page) => (
-                                    <Link key={page.id} to={page.path}>
-                                        {t[`nav${page.id.replace(/-/g, '').replace(/^\w/, (c) => c.toUpperCase())}`]}
-                                    </Link>
-                                ))}
-                            </div>
-                        </div>
-                        
-                        <div className="sitemap-column">
-                            <h5>{t.services}</h5>
-                            <div className="sitemap-links">
-                                {sitemapSections.services.map((page) => (
-                                    <Link key={page.id} to={page.path}>
-                                        {t[`nav${page.id.replace(/-/g, '').replace(/^\w/, (c) => c.toUpperCase())}`]}
-                                    </Link>
-                                ))}
-                            </div>
-                        </div>
-                        
-                        <div className="sitemap-column">
-                            <h5>{t.resources}</h5>
-                            <div className="sitemap-links">
-                                {sitemapSections.resources.map((page) => (
-                                    <Link key={page.id} to={page.path}>
-                                        {t[`nav${page.id.replace(/-/g, '').replace(/^\w/, (c) => c.toUpperCase())}`]}
-                                    </Link>
-                                ))}
-                            </div>
-                        </div>
-                        
-                        <div className="sitemap-column">
-                            <h5>{t.support}</h5>
-                            <div className="sitemap-links">
-                                {sitemapSections.support.map((page) => (
-                                    <Link key={page.id} to={page.path}>
-                                        {t[`nav${page.id.replace(/-/g, '').replace(/^\w/, (c) => c.toUpperCase())}`]}
-                                    </Link>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
+                {/* Support Section */}
+                <div className="ki-footer-section">
+                    <h4 className="ki-footer-title">{t.support}</h4>
+                    <ul className="ki-footer-links">
+                        <li><Link to="/updates">{t.updates}</Link></li>
+                        <li><Link to="/faqs">{t.faqs}</Link></li>
+                    </ul>
                 </div>
+
+                {/* Company Section */}
+                <div className="ki-footer-section">
+                    <h4 className="ki-footer-title">{t.company}</h4>
+                    <ul className="ki-footer-links">
+                        <li><Link to="/about-us">{t.aboutUs}</Link></li>
+                        <li><Link to="/inquiries">{t.inquiries}</Link></li>
+                    </ul>
+                </div>
+
+                {/* Legal Section */}
+                <div className="ki-footer-section">
+                    <h4 className="ki-footer-title">{t.legal}</h4>
+                    <ul className="ki-footer-links">
+                        <li><Link to="/terms-of-use">{t.termsOfUse}</Link></li>
+                        <li><Link to="/privacy-policy">{t.privacyPolicy}</Link></li>
+                        <li><Link to="/commercial-transactions">{t.commercialTransactions}</Link></li>
+                    </ul>
+                </div>
+            </div>
+
+            {/* Copyright */}
+            <div className="ki-footer-bottom">
+                <p className="ki-footer-copyright">{t.copyright}</p>
             </div>
         </footer>
     );

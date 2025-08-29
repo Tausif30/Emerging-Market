@@ -1,70 +1,48 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { LanguageContext } from '../../contexts/LanguageContext';
-import { ThemeContext } from '../../contexts/ThemeContext';
-import NavbarDropdown from './Navbar';
-import pages from '../../utils/pages';
 import './Header.css';
+import logoImage from './assets/Logo.png';
 
 // Import FontAwesome components and icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faTimes, faCaretDown, faPhoneVolume, faUser, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faTimes, faGlobe } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
     const { language, setLanguage } = useContext(LanguageContext);
-    const { theme, toggleTheme } = useContext(ThemeContext);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [openSubmenu, setOpenSubmenu] = useState(null);
     const [isVisible, setIsVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
     const [isScrolled, setIsScrolled] = useState(false);
 
     const translations = {
         en: {
-            serviceName: 'KiAI',
-            tagline: 'AI-driven emerging market intelligence',
-            inquiry: 'Inquiry',
-            logIn: 'Log in',
-            onlineConsultation: 'Online consultation',
-            themeSwitch: 'Theme',
-            langSwitch: 'Language',
-            navWhatiskiai: 'What is KiAI?',
-            navPricingplans: 'Pricing and Plans',
-            navFunction: 'Function',
-            navCasestudies: 'Case studies',
-            navSupport: 'Support',
-            navBlog: 'Blog',
-            navInformation: 'Information',
-            navRequestfor: 'Request for',
+            howToUse: 'How To Use',
+            client: 'Client',
+            emergingMarket: 'Emerging Market',
+            whyKiai: 'Why KiAI',
+            login: 'Login',
+            tryFree: 'Try free',
+            currentLanguage: 'English'
         },
         ja: {
-            serviceName: 'KiAI',
-            tagline: 'AIによる新興市場インテリジェンス',
-            inquiry: 'お問い合わせ',
-            logIn: 'ログイン',
-            onlineConsultation: 'オンライン相談',
-            themeSwitch: 'テーマ',
-            langSwitch: '言語',
-            navWhatiskiai: 'KiAIとは?',
-            navPricingplans: '料金・プラン',
-            navFunction: '機能',
-            navCasestudies: '導入事例',
-            navSupport: 'サポート',
-            navBlog: 'ブログ',
-            navInformation: 'インフォメーション',
-            navRequestfor: '資料請求',
+            howToUse: '使い方',
+            client: 'クライアント',
+            emergingMarket: '新興市場',
+            whyKiai: 'なぜKiAI',
+            login: 'ログイン',
+            tryFree: '無料で試す',
+            currentLanguage: '日本語'
         },
     };
 
     const t = translations[language];
-    const navLinks = pages.filter(page => page.anchorable && page.id !== 'not-found');
 
     // Handle window resize to close mobile menu when switching to desktop
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth > 992) {
                 setIsMobileMenuOpen(false);
-                setOpenSubmenu(null);
                 document.body.classList.remove('mobile-menu-open');
             }
         };
@@ -106,10 +84,6 @@ const Header = () => {
         };
     }, [lastScrollY]);
 
-    const handleLanguageChange = (event) => {
-        setLanguage(event.target.value);
-    };
-
     const toggleMobileMenu = () => {
         const newMenuState = !isMobileMenuOpen;
         setIsMobileMenuOpen(newMenuState);
@@ -122,182 +96,65 @@ const Header = () => {
         }
     };
 
-    const toggleSubmenu = (menuId) => {
-        setOpenSubmenu(openSubmenu === menuId ? null : menuId);
-    };
-
-    const handleSmoothScroll = (e, id) => {
-        e.preventDefault();
-        const element = document.getElementById(id);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-            setIsMobileMenuOpen(false); // Close menu after click
-        }
-    };
-
     return (
         <header className={`ki-header ${isVisible ? 'ki-header-visible' : 'ki-header-hidden'} ${isScrolled ? 'scrolled' : ''}`}>
-            <div className="ki-top-bar">
-                <div className="ki-top-left">
+            <div className="ki-header-content">
+                {/* Logo Section */}
+                <div className="ki-logo-section">
                     <Link to="/what-is-kiai" className="ki-logo-link">
-                        <span className="ki-logo">{t.serviceName}</span>
-                        <span className="ki-tagline">{t.tagline}</span>
+                        <img src={logoImage} alt="KiAI Logo" className="ki-logo-image" />
                     </Link>
                 </div>
-                <div className="ki-top-right ki-desktop-only">
-                    <a href="#consultation" className="ki-link" onClick={(e) => handleSmoothScroll(e, 'consultation')}>
-                        <FontAwesomeIcon icon={faPhoneVolume} />
-                        {t.onlineConsultation}
-                    </a>
-                    <NavLink to="/request-for" className="ki-link">
-                        <FontAwesomeIcon icon={faQuestionCircle} />
-                        {t.inquiry}
-                    </NavLink>
-                    <a href="#login" className="ki-link ki-login-link" onClick={(e) => handleSmoothScroll(e, 'login')}>
-                        <FontAwesomeIcon icon={faUser} />
-                        {t.logIn}
-                    </a>
 
-                    <div className="ki-control-group">
-                        <label htmlFor="language-select" className="ki-label">{t.langSwitch}:</label>
-                        <select id="language-select" value={language} onChange={handleLanguageChange} className="ki-select">
-                            <option value="en">English</option>
-                            <option value="ja">日本語</option>
-                        </select>
+                {/* Desktop Navigation */}
+                <nav className="ki-main-nav ki-desktop-nav">
+                    <ul>
+                        <li><NavLink to="/how-to-use">{t.howToUse}</NavLink></li>
+                        <li><NavLink to="/client">{t.client}</NavLink></li>
+                        <li><NavLink to="/what-is-kiai">{t.emergingMarket}</NavLink></li>
+                        <li><NavLink to="/why-kiai">{t.whyKiai}</NavLink></li>
+                    </ul>
+                </nav>
+
+                {/* Right Side Actions */}
+                <div className="ki-header-actions">
+                    <div className="ki-desktop-only">
+                        <NavLink to="/login" className="ki-login-btn">{t.login}</NavLink>
+                        <NavLink to="/try-free" className="ki-try-free-btn">{t.tryFree}</NavLink>
+                        
+                        {/* Language Selector Button */}
+                        <button className="ki-language-btn" onClick={() => setLanguage(language === 'en' ? 'ja' : 'en')}>
+                            <FontAwesomeIcon icon={faGlobe} />
+                            {t.currentLanguage}
+                        </button>
                     </div>
 
-                    <div className="ki-control-group">
-                        <label htmlFor="theme-toggle" className="ki-label">{t.themeSwitch}:</label>
-                        <label className="ki-switch">
-                            <input type="checkbox" id="theme-toggle" checked={theme === 'dark'} onChange={toggleTheme} />
-                            <span className="ki-slider round"></span>
-                        </label>
-                    </div>
+                    {/* Mobile Hamburger */}
+                    <button className="ki-hamburger-button" onClick={toggleMobileMenu}>
+                        <FontAwesomeIcon icon={isMobileMenuOpen ? faTimes : faBars} />
+                    </button>
                 </div>
-                <button className="ki-hamburger-button" onClick={toggleMobileMenu}>
-                    <FontAwesomeIcon icon={isMobileMenuOpen ? faTimes : faBars} />
-                </button>
             </div>
 
-            {/* Desktop Navbar with hover popups */}
-            <nav className="ki-main-nav ki-desktop-nav">
-                <ul>
-                    {navLinks.map((page) => (
-                        <li key={page.id} className={page.id === 'information' ? 'ki-highlighted' : (page.id === 'request-for' ? 'ki-request-btn' : '')}>
-                            <NavLink
-                                to={page.path}
-                                className={({ isActive }) => (isActive ? 'active' : '')}
-                            >
-                                {t[`nav${page.id.replace(/-/g, '').replace(/^\w/, (c) => c.toUpperCase())}`]}
-                            </NavLink>
-                            {page.id !== 'information' && page.id !== 'request-for' && (
-                                <NavbarDropdown mainTopic={page.name} />
-                            )}
-                        </li>
-                    ))}
-                </ul>
-            </nav>
-
-            {/* Mobile Navbar (Hamburger Menu) with collapsible sub-menus */}
+            {/* Mobile Navigation */}
             <nav className={`ki-mobile-nav ${isMobileMenuOpen ? 'open' : ''}`}>
                 <ul>
-                    {navLinks.map((page) => {
-                        const hasSubmenu = page.id !== 'information' && page.id !== 'request-for';
-                        return (
-                            <li key={page.id}>
-                                <div className="mobile-nav-item-header">
-                                    <NavLink
-                                        to={page.path}
-                                        className={({ isActive }) => (isActive ? 'active' : '')}
-                                        onClick={() => {
-                                            if (!hasSubmenu) {
-                                                toggleMobileMenu();
-                                            } else {
-                                                toggleSubmenu(page.id);
-                                            }
-                                        }}
-                                    >
-                                        {t[`nav${page.id.replace(/-/g, '').replace(/^\w/, (c) => c.toUpperCase())}`]}
-                                    </NavLink>
-                                    {hasSubmenu && (
-                                        <span className={`mobile-chevron ${openSubmenu === page.id ? 'open' : ''}`} onClick={() => toggleSubmenu(page.id)}>
-                                            <FontAwesomeIcon icon={faCaretDown} />
-                                        </span>
-                                    )}
-                                </div>
-                                {hasSubmenu && (
-                                    <div className={`mobile-submenu ${openSubmenu === page.id ? 'open' : ''}`}>
-                                        <NavbarDropdown mainTopic={page.name} isMobile={true} closeMobileMenu={toggleMobileMenu} />
-                                    </div>
-                                )}
-                            </li>
-                        );
-                    })}
+                    <li><NavLink to="/how-to-use" onClick={() => toggleMobileMenu()}>{t.howToUse}</NavLink></li>
+                    <li><NavLink to="/client" onClick={() => toggleMobileMenu()}>{t.client}</NavLink></li>
+                    <li><NavLink to="/what-is-kiai" onClick={() => toggleMobileMenu()}>{t.emergingMarket}</NavLink></li>
+                    <li><NavLink to="/why-kiai" onClick={() => toggleMobileMenu()}>{t.whyKiai}</NavLink></li>
+                    <li><NavLink to="/login" onClick={() => toggleMobileMenu()}>{t.login}</NavLink></li>
+                    <li><NavLink to="/try-free" onClick={() => toggleMobileMenu()}>{t.tryFree}</NavLink></li>
                     
-                    {/* Action links with same styling as nav items */}
+                    {/* Mobile Language Toggle */}
                     <li>
-                        <div className="mobile-nav-item-header">
-                            <a href="#consultation" className="ki-link" onClick={(e) => {
-                                handleSmoothScroll(e, 'consultation');
-                                toggleMobileMenu();
-                            }}>
-                                <FontAwesomeIcon icon={faPhoneVolume} />
-                                {t.onlineConsultation}
-                            </a>
-                        </div>
-                    </li>
-                    
-                    <li>
-                        <div className="mobile-nav-item-header">
-                            <NavLink 
-                                to="/request-for" 
-                                className="ki-link"
-                                onClick={() => toggleMobileMenu()}
-                            >
-                                <FontAwesomeIcon icon={faQuestionCircle} />
-                                {t.inquiry}
-                            </NavLink>
-                        </div>
-                    </li>
-                    
-                    <li>
-                        <div className="mobile-nav-item-header">
-                            <a href="#login" className="ki-link" onClick={(e) => {
-                                handleSmoothScroll(e, 'login');
-                                toggleMobileMenu();
-                            }}>
-                                <FontAwesomeIcon icon={faUser} />
-                                {t.logIn}
-                            </a>
-                        </div>
-                    </li>
-
-                    {/* Language selector with same styling */}
-                    <li>
-                        <div className="mobile-nav-item-header">
-                            <div className="mobile-control-item">
-                                <FontAwesomeIcon icon={faCaretDown} />
-                                <span>{t.langSwitch}</span>
-                                <select value={language} onChange={handleLanguageChange} className="mobile-select">
-                                    <option value="en">English</option>
-                                    <option value="ja">日本語</option>
-                                </select>
-                            </div>
-                        </div>
-                    </li>
-
-                    {/* Theme toggle with same styling */}
-                    <li>
-                        <div className="mobile-nav-item-header">
-                            <div className="mobile-control-item">
-                                <FontAwesomeIcon icon={faCaretDown} />
-                                <span>{t.themeSwitch}</span>
-                                <label className="mobile-switch">
-                                    <input type="checkbox" checked={theme === 'dark'} onChange={toggleTheme} />
-                                    <span className="mobile-slider"></span>
-                                </label>
-                            </div>
-                        </div>
+                        <button className="mobile-language-btn" onClick={() => {
+                            setLanguage(language === 'en' ? 'ja' : 'en');
+                            toggleMobileMenu();
+                        }}>
+                            <FontAwesomeIcon icon={faGlobe} />
+                            {t.currentLanguage}
+                        </button>
                     </li>
                 </ul>
             </nav>

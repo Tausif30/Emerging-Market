@@ -1,179 +1,184 @@
-.section-navigation {
+
+.dot-navigation {
     position: fixed;
-    top: 115px;
-    left: 0;
-    right: 0;
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border-color);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 999;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    transform: translateY(-100%);
-    opacity: 0;
-    margin-top: 0;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
 }
 
-.section-nav-visible {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-.section-nav-hidden {
-    transform: translateY(-100%);
-    opacity: 0;
-}
-
-.section-nav-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 12px 40px;
+.dots-container {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-}
-
-.section-nav-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-color);
-    opacity: 0.8;
-    white-space: nowrap;
-}
-
-.section-nav-items {
-    display: flex;
+    flex-direction: column;
     gap: 15px;
-    flex-wrap: wrap;
-    align-items: center;
 }
 
-.section-nav-item {
-    background: none;
-    border: 1px solid var(--border-color);
-    color: var(--text-color);
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 500;
+.dot-wrapper {
+    position: relative;
+}
+
+/* Navigation Dots */
+.navigation-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(0, 0, 0, 0.6);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Touch support for mobile and tablet */
+@media (hover: none) and (pointer: coarse) {
+    .navigation-dot {
+        width: 16px;
+        height: 16px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border: 3px solid rgba(0, 0, 0, 0.7);
+    }
+    
+    /* Touch active state - shows tooltip */
+    .navigation-dot:active,
+    .navigation-dot.touch-active {
+        background-color: #333333;
+        border-color: #333333;
+        transform: scale(1.5);
+        box-shadow: 0 0 15px rgba(51, 51, 51, 0.6);
+    }
+    
+    /* Show tooltip on touch */
+    .dot-wrapper.touch-active .dot-tooltip {
+        opacity: 1;
+        animation: tooltipFadeIn 0.2s ease-out;
+        pointer-events: auto;
+    }
+}
+
+/* Hide dots when at main section */
+.dot-navigation.main-section .navigation-dot {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Active Dot */
+.navigation-dot.active {
+    background-color: #333333;
+    border-color: #333333;
+    transform: scale(1.1);
+}
+
+/* Hover Effect - Enhanced Fish Eye */
+.navigation-dot:hover {
+    background-color: #333333;
+    border-color: #333333;
+    transform: scale(2.5);
+    box-shadow: 0 0 10px rgba(51, 51, 51, 0.5);
+}
+
+/* Adjacent dots scaling effect for fisheye */
+.dots-container:hover .navigation-dot:not(:hover) {
+    transform: scale(0.7);
+    opacity: 0.4;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.dots-container:hover .navigation-dot:not(:hover).active {
+    transform: scale(0.9);
+    opacity: 0.7;
+}
+
+/* Enhanced fisheye effect for dots adjacent to hovered dot */
+.dot-wrapper:hover + .dot-wrapper .navigation-dot,
+.dot-wrapper:has(+ .dot-wrapper:hover) .navigation-dot {
+    transform: scale(0.9);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+/* Tooltip */
+.dot-tooltip {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
     white-space: nowrap;
+    pointer-events: none;
+    z-index: 1001;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-.section-nav-item:hover {
-    background-color: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-    transform: translateY(-1px);
-}
-
-.section-nav-item:active {
-    transform: translateY(0);
-}
-
-/* Dark theme support */
-[data-theme="dark"] .section-navigation {
-    background-color: rgba(30, 30, 30, 0.95);
-    border-bottom-color: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="dark"] .section-nav-item {
-    border-color: rgba(255, 255, 255, 0.3);
-    color: #ffffff;
-}
-
-[data-theme="dark"] .section-nav-item:hover {
-    background-color: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-}
-
-[data-theme="dark"] .section-nav-title {
-    color: #ffffff;
-}
-
-/* Additional dark theme support with body class and CSS variables */
-body.dark-theme .section-navigation,
-body[data-theme="dark"] .section-navigation,
-.dark .section-navigation {
-    background-color: rgba(30, 30, 30, 0.95);
-    border-bottom-color: rgba(255, 255, 255, 0.1);
-}
-
-body.dark-theme .section-nav-item,
-body[data-theme="dark"] .section-nav-item,
-.dark .section-nav-item {
-    border-color: rgba(255, 255, 255, 0.3);
-    color: #ffffff;
-    background-color: transparent;
-}
-
-body.dark-theme .section-nav-item:hover,
-body[data-theme="dark"] .section-nav-item:hover,
-.dark .section-nav-item:hover {
-    background-color: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-}
-
-body.dark-theme .section-nav-title,
-body[data-theme="dark"] .section-nav-title,
-.dark .section-nav-title {
-    color: #ffffff;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 992px) {
-    .section-navigation {
-        top: 59px;
+/* Show tooltip on hover for desktop */
+@media (hover: hover) and (pointer: fine) {
+    .dot-wrapper:hover .dot-tooltip {
+        opacity: 1;
+        animation: tooltipFadeIn 0.3s ease-out;
     }
 }
 
+/* Tooltip Animation */
+@keyframes tooltipFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50%) translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+    }
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-    .section-nav-content {
-        padding: 10px 20px;
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
+    .dot-navigation {
+        right: 15px;
     }
     
-    .section-nav-title {
-        font-size: 12px;
+    .dots-container {
+        gap: 15px;
     }
     
-    .section-nav-items {
-        gap: 8px;
-        width: 100%;
-        justify-content: center;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+    .navigation-dot {
+        width: 14px;
+        height: 14px;
+        border: 2px solid rgba(0, 0, 0, 0.7);
     }
     
-    .section-nav-item {
-        padding: 6px 12px;
-        font-size: 12px;
-        flex: 1;
-        min-width: 0;
-        text-align: center;
+    .dot-tooltip {
+        font-size: 13px;
+        padding: 8px 12px;
+        right: 22px;
+        background-color: rgba(0, 0, 0, 0.9);
     }
 }
 
 @media (max-width: 480px) {
-    .section-nav-content {
-        padding: 8px 15px;
+    .dot-navigation {
+        right: 12px;
     }
     
-    .section-nav-items {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 6px;
-        width: 100%;
+    .dots-container {
+        gap: 18px;
     }
     
-    .section-nav-item {
-        padding: 8px 10px;
-        font-size: 11px;
+    .navigation-dot {
+        width: 12px;
+        height: 12px;
+        border: 2px solid rgba(0, 0, 0, 0.7);
+    }
+    
+    .dot-tooltip {
+        font-size: 12px;
+        padding: 6px 10px;
+        right: 20px;
+        background-color: rgba(0, 0, 0, 0.9);
     }
 }

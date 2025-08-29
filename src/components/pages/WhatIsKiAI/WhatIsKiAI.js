@@ -1,24 +1,21 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 import { LanguageContext } from '../../../contexts/LanguageContext';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import './WhatIsKiAI.css';
 import SectionNavigation from './SectionNavigation';
 import phoneImage from './assets/phone-image.png';
-import shieldImage from './assets/Shield.png';
 import data from './assets/Data.png';
 
 const WhatIsKiAI = () => {
     const { language } = useContext(LanguageContext);
+    const containerRef = useRef(null);
 
     const translations = {
         en: {
             Title: 'What is Emerging Market Information Gathering?',
-            Subtitle: 'No.1 AI Data Analytics for Emerging Markets',
-            Tagline: 'KiAI',
             Description1: 'Learn about emerging market through the help of AI.',
-            button1: 'Download materials',
-            button2: 'Try it for free',
             introText: 'Emerging market information gathering is a key process that enables businesses to...',
-            section1Title: 'The Importance of Information Gathering in Emerging Markets',
+            section1Title: 'Importance of Information Gathering',
             section1Points: [
                 'Emerging markets offer huge growth potential but also high uncertainty.',
                 'Reliable, up-to-date data is crucial for making informed decisions.',
@@ -82,13 +79,8 @@ const WhatIsKiAI = () => {
         },
         ja: {
             Title: '新興国の情報収集とは？',
-            Subtitle: '国内シェアNo.1',
-            Tagline: 'KiAI',
             Description1: '「新興国情報」を3分で学ぶ',
-            button1: '資料をダウンロード',
-            button2: '無料で試す',
-            introText: '新興国の情報収集は、企業が成長を加速させるために不可欠なプロセスです...',
-            section1Title: '新興国の情報収集の重要性',
+            section1Title: '新興国の情報収集',
             section1Points: [
                 '新興国は大きな成長の可能性を持つ一方、不確実性も高い市場です。',
                 '信頼できる最新情報を入手することが、正しい意思決定に不可欠です。',
@@ -154,124 +146,228 @@ const WhatIsKiAI = () => {
 
     const t = translations[language];
 
+    useEffect(() => {
+        // Get all sections
+        const sections = document.querySelectorAll('.ki-section');
+        
+        // Create intersection observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Add animate-in class to text and image when section is visible
+                    const text = entry.target.querySelector('.ki-section-text');
+                    const image = entry.target.querySelector('.ki-section-image');
+                    
+                    if (text) {
+                        // Add slight delay for text animation
+                        setTimeout(() => {
+                            text.classList.add('animate-in');
+                        }, 100);
+                    }
+                    
+                    if (image) {
+                        // Add slight delay for image animation
+                        setTimeout(() => {
+                            image.classList.add('animate-in');
+                        }, 300);
+                    }
+                } else {
+                    // Remove animate-in class when section is not visible
+                    const text = entry.target.querySelector('.ki-section-text');
+                    const image = entry.target.querySelector('.ki-section-image');
+                    
+                    if (text) {
+                        text.classList.remove('animate-in');
+                    }
+                    
+                    if (image) {
+                        image.classList.remove('animate-in');
+                    }
+                }
+            });
+        }, {
+            threshold: 0.3, // Trigger when 30% of section is visible
+            rootMargin: '0px 0px -10% 0px' // Trigger slightly before section is fully visible
+        });
+        
+        // Observe all sections
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Also handle the first section immediately if it's in view
+        setTimeout(() => {
+            const firstSection = sections[0];
+            if (firstSection) {
+                const rect = firstSection.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                // If first section is in view, animate it immediately
+                if (rect.top < windowHeight * 0.7) {
+                    const text = firstSection.querySelector('.ki-section-text');
+                    const image = firstSection.querySelector('.ki-section-image');
+                    
+                    if (text) {
+                        setTimeout(() => {
+                            text.classList.add('animate-in');
+                        }, 100);
+                    }
+                    
+                    if (image) {
+                        setTimeout(() => {
+                            image.classList.add('animate-in');
+                        }, 300);
+                    }
+                }
+            }
+        }, 500);
+
+        // Cleanup observer on unmount
+        return () => {
+            observer.disconnect();
+        };
+    }, []);
+
     return (
         <div className="ki-page-content">
             <SectionNavigation />
             <div className="ki-main">
                 <div className="ki-main-text">
-                    <p className="ki-main-subtitle">{t.Subtitle}</p>
-                    <h2 className="ki-main-tagline">{t.Tagline}</h2>
                     <h1 className="ki-main-title">{t.Title}</h1>
                     <div className="ki-links">
                         <span className="ki-link-item">{t.Description1}</span>
                     </div>
-                    <div className="ki-buttons">
-                        <button className="ki-button-blue">{t.button1}</button>
-                        <button className="ki-button-orange">{t.button2}</button>
-                    </div>
-                </div>
-                <div className="ki-main-image">
-                    <img src={phoneImage} alt="A hand holding a phone displaying a mobile app" />
                 </div>
             </div>
 
-            <div className="ki-section-wrapper">
-                <div className="ki-section" id="information-gathering">
-                    <h2>{t.section1Title}</h2>
-                    <ul className="ki-section-points">
-                        {t.section1Points.map((point, index) => (
-                            <li key={index}>{point}</li>
-                        ))}
-                    </ul>
-                </div>
-                <div className="ki-section" id="improving-efficiency">
-                    <h2>{t.section2Title}</h2>
-                    <ul className="ki-section-points">
-                        {t.section2Content.map((point, index) => (
-                            <li key={index}>
-                                {point}
-                                {index === 2 && (
-                                    <ul className="ki-section-sub-strategies">
-                                        {t.section2Strategies.map((strategy, strategyIndex) => (
-                                            <li key={strategyIndex}>{strategy}</li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </li>
-                        ))}
-                        <li>{t.section2Conclusion}</li>
-                    </ul>
-                </div>
-                <div className="ki-section ki-section-with-image" id="risk-mitigation">
+            <div className="ki-section-wrapper" ref={containerRef}>
+                <div className='ki-section' id='ki-section-1'>
                     <div className="ki-section-content">
-                        <div className="ki-section-text">
-                            <h2>{t.section3Title}</h2>
-                            <ul className="ki-section-points">
-                                {t.section3Content.map((point, index) => (
-                                    <li key={index}>
-                                        {point}
-                                        {index === 0 && (
-                                            <ul className="ki-section-sub-strategies">
-                                                {t.section3Risks.map((risk, riskIndex) => (
-                                                    <li key={riskIndex}>{risk}</li>
-                                                ))}
-                                            </ul>
-                                        )}
-                                        {index === 2 && (
-                                            <ul className="ki-section-sub-strategies">
-                                                {t.section3Cost.map((cost, costIndex) => (
-                                                    <li key={costIndex}>{cost}</li>
-                                                ))}
-                                            </ul>
-                                        )}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className="ki-section-image">
-                            <img src={shieldImage} alt="Security shield representing risk mitigation" />
+                        <h2>{t.section1Title}</h2>
+                        <div className="ki-section-body">
+                            <div className="ki-section-text">
+                                <ul className="ki-section-points">
+                                    {t.section1Points.map((point, index) => (
+                                        <li key={index}>{point}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div className="ki-section-image">
+                                <img src={data} alt="Data Visualization" />
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="ki-section" id="compliance">
-                    <h2>{t.section4Title}</h2>
-                    <ul className="ki-section-points">
-                        {t.section4Content.map((point, index) => (
-                            <li key={index}>
-                                {point}
-                                {index === 2 && (
-                                    <ul className="ki-section-sub-strategies">
-                                        {t.section4Benefits.map((benefit, benefitIndex) => (
-                                            <li key={benefitIndex}>{benefit}</li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </li>
-                        ))}
-                        <li>{t.section4Conclusion}</li>
-                    </ul>
-                </div>
-                <div className="ki-section ki-section-with-image" id="leveraging-data">
+                    </div>
+                    <div className='ki-section' id='ki-section-2'>
                     <div className="ki-section-content">
-                        <div className="ki-section-text">
-                            <h2>{t.section5Title}</h2>
-                            <ul className="ki-section-points">
-                                {t.section5Content.map((point, index) => (
-                                    <li key={index}>
-                                        {point}
-                                        {index === 1 && (
-                                            <ul className="ki-section-sub-strategies">
-                                                {t.section5Examples.map((example, exampleIndex) => (
-                                                    <li key={exampleIndex}>{example}</li>
-                                                ))}
-                                            </ul>
-                                        )}
-                                    </li>
-                                ))}
-                            </ul>
+                        <h2>{t.section2Title}</h2>
+                        <div className="ki-section-body">
+                            <div className="ki-section-text">
+                                <ul className="ki-section-points">
+                                    {t.section2Content.map((point, index) => (
+                                        <li key={index}>
+                                            {point}
+                                            {index === 2 && (
+                                                <ul className="ki-section-sub-strategies">
+                                                    {t.section2Strategies.map((strategy, strategyIndex) => (
+                                                        <li key={strategyIndex}>{strategy}</li>
+                                                    ))}
+                                                </ul>
+                                            )}
+                                        </li>
+                                    ))}
+                                    <li>{t.section2Conclusion}</li>
+                                </ul>
+                            </div>
+                            <div className="ki-section-image">
+                                <img src={data} alt="Data Visualization" />
+                            </div>
                         </div>
-                        <div className="ki-section-image">
-                            <img src={data} alt="Data Visualization" />
+                    </div>
+                    </div>
+                    <div className='ki-section' id='ki-section-3'>
+                    <div className="ki-section-content">
+                        <h2>{t.section3Title}</h2>
+                        <div className="ki-section-body">
+                            <div className="ki-section-text">
+                                <ul className="ki-section-points">
+                                    {t.section3Content.map((point, index) => (
+                                        <li key={index}>
+                                            {point}
+                                            {index === 0 && (
+                                                <ul className="ki-section-sub-strategies">
+                                                    {t.section3Risks.map((risk, riskIndex) => (
+                                                        <li key={riskIndex}>{risk}</li>
+                                                    ))}
+                                                </ul>
+                                            )}
+                                            {index === 2 && (
+                                                <ul className="ki-section-sub-strategies">
+                                                    {t.section3Cost.map((cost, costIndex) => (
+                                                        <li key={costIndex}>{cost}</li>
+                                                    ))}
+                                                </ul>
+                                            )}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div className="ki-section-image">
+                                <img src={data} alt="Data Visualization" />
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div className='ki-section' id='ki-section-4'>
+                    <div className="ki-section-content">
+                        <h2>{t.section4Title}</h2>
+                        <div className="ki-section-body">
+                            <div className="ki-section-text">
+                                <ul className="ki-section-points">
+                                    {t.section4Content.map((point, index) => (
+                                        <li key={index}>
+                                            {point}
+                                            {index === 2 && (
+                                                <ul className="ki-section-sub-strategies">
+                                                    {t.section4Benefits.map((benefit, benefitIndex) => (
+                                                        <li key={benefitIndex}>{benefit}</li>
+                                                    ))}
+                                                </ul>
+                                            )}
+                                        </li>
+                                    ))}
+                                    <li>{t.section4Conclusion}</li>
+                                </ul>
+                            </div>
+                            <div className="ki-section-image">
+                                <img src={data} alt="Data Visualization" />
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div className='ki-section' id='ki-section-5'>
+                    <div className="ki-section-content">
+                        <h2>{t.section5Title}</h2>
+                        <div className="ki-section-body">
+                            <div className="ki-section-text">
+                                <ul className="ki-section-points">
+                                    {t.section5Content.map((point, index) => (
+                                        <li key={index}>
+                                            {point}
+                                            {index === 1 && (
+                                                <ul className="ki-section-sub-strategies">
+                                                    {t.section5Examples.map((example, exampleIndex) => (
+                                                        <li key={exampleIndex}>{example}</li>
+                                                    ))}
+                                                </ul>
+                                            )}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div className="ki-section-image">
+                                <img src={data} alt="Data Visualization" />
+                            </div>
                         </div>
                     </div>
                 </div>

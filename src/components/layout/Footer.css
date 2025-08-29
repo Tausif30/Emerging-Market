@@ -92,40 +92,155 @@
     opacity: 1;
 }
 
-/* Responsive adjustments for sitemap */
-@media (max-width: 1024px) {
-    .sitemap-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 25px;
+/* Footer styling to match the dark design */
+.ki-footer {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    padding: 60px 0 20px 0;
+    margin-top: auto;
+}
+
+.ki-footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+/* Logo and brand section */
+.ki-footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.ki-footer-logo-link {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.ki-footer-logo {
+    height: 40px;
+    width: auto;
+    filter: brightness(0) invert(1); /* Makes logo white for dark background */
+}
+
+.ki-footer-tagline {
+    color: #cccccc;
+    font-size: 14px;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Footer sections */
+.ki-footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ki-footer-title {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    margin-bottom: 8px;
+}
+
+.ki-footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ki-footer-links li {
+    margin: 0;
+}
+
+.ki-footer-links a {
+    color: #cccccc;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 1.4;
+    transition: color 0.2s ease;
+}
+
+.ki-footer-links a:hover {
+    color: #ffffff;
+}
+
+/* Copyright section */
+.ki-footer-bottom {
+    border-top: 1px solid #333333;
+    margin-top: 40px;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.ki-footer-copyright {
+    color: #888888;
+    font-size: 12px;
+    margin: 0;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+    .ki-footer-content {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 40px;
+    }
+}
+
+@media (max-width: 992px) {
+    .ki-footer {
+        padding: 50px 0 20px 0;
+    }
+    
+    .ki-footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        padding: 0 20px;
+    }
+    
+    .ki-footer-brand {
+        grid-column: 1 / -1;
+        text-align: center;
+        margin-bottom: 20px;
     }
 }
 
 @media (max-width: 768px) {
-    .footer-content {
-        padding: 25px 20px 25px;
+    .ki-footer {
+        padding: 40px 0 20px 0;
     }
     
-    .footer-company-info {
-        margin-bottom: 25px;
-    }
-    
-    .sitemap-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .footer-content {
-        padding: 20px 15px 20px;
-    }
-    
-    .footer-company-info {
-        margin-bottom: 20px;
-    }
-    
-    .sitemap-grid {
+    .ki-footer-content {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 30px;
+        padding: 0 16px;
+        text-align: center;
+    }
+    
+    .ki-footer-brand {
+        grid-column: auto;
+        margin-bottom: 0;
+    }
+    
+    .ki-footer-logo {
+        height: 36px;
+    }
+    
+    .ki-footer-title {
+        font-size: 15px;
+    }
+    
+    .ki-footer-links a {
+        font-size: 13px;
     }
 }
