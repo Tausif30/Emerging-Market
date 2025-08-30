@@ -450,7 +450,7 @@
 
 .ki-section-text {
     flex: 1;
-    color: #303436;
+    color: #000000;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -493,7 +493,7 @@
 
 /* Typography - restored text sizes */
 .ki-section h2 {
-    color: #303436;
+    color: #000000;
     font-size: 48px;
     font-weight: 700;
     margin-bottom: 30px;
@@ -506,7 +506,7 @@
     list-style: disc;
     padding-left: 20px;
     margin: 0;
-    color: #303436;
+    color: #000000;
     text-align: left;
 }
 
@@ -871,6 +871,7 @@
         width: 100%;
         margin-bottom: 15px;
         font-size: 32px;
+        color: #000000;
     }
     
     .ki-section-body {
@@ -915,18 +916,21 @@
         font-size: 24px;
         margin-bottom: 15px;
         line-height: 1.2;
+        color: #000000;
     }
     
     .ki-section-points {
         margin: 10px 0;
         padding-left: 20px;
         font-size: 16px;
+        color: #000000;
     }
     
     .ki-section-points > li {
         font-size: 16px;
         line-height: 1.4;
         margin-bottom: 4px;
+        color: #000000;
     }
 
     /* Mobile Carousel Styles */
@@ -988,6 +992,7 @@
         text-align: center;
         line-height: 1.3;
         flex-shrink: 0;
+        color: #000000;
     }
 
     .ki-carousel-slide .ki-section-body {

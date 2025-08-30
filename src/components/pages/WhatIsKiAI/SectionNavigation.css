@@ -43,8 +43,8 @@
     /* Touch active state - shows tooltip */
     .navigation-dot:active,
     .navigation-dot.touch-active {
-        background-color: #333333;
-        border-color: #333333;
+        background-color: #000000;
+        border-color: #000000;
         transform: scale(1.5);
         box-shadow: 0 0 15px rgba(51, 51, 51, 0.6);
     }
@@ -65,15 +65,15 @@
 
 /* Active Dot */
 .navigation-dot.active {
-    background-color: #333333;
-    border-color: #333333;
+    background-color: #000000;
+    border-color: #000000;
     transform: scale(1.1);
 }
 
 /* Hover Effect - Enhanced Fish Eye */
 .navigation-dot:hover {
-    background-color: #333333;
-    border-color: #333333;
+    background-color: #000000;
+    border-color: #000000;
     transform: scale(2.5);
     box-shadow: 0 0 10px rgba(51, 51, 51, 0.5);
 }
