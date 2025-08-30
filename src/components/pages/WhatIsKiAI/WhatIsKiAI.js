@@ -1,10 +1,12 @@
 import React, { useContext, useRef, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LanguageContext } from '../../../contexts/LanguageContext';
-import { motion, useScroll, useTransform } from 'framer-motion';
 import './WhatIsKiAI.css';
 import SectionNavigation from './SectionNavigation';
-import phoneImage from './assets/phone-image.png';
+import map from './assets/map.png';
+import law from './assets/Law.png';
+import business from './assets/business_expansion.png';
+import risk from './assets/Risk.png';
 import data from './assets/Data.png';
 
 const WhatIsKiAI = () => {
@@ -16,13 +18,12 @@ const WhatIsKiAI = () => {
     const [touchStart, setTouchStart] = useState(null);
     const [touchEnd, setTouchEnd] = useState(null);
     const [showDotTooltip, setShowDotTooltip] = useState(null);
-    const [hoveredDot, setHoveredDot] = useState(null);
     const [pressedDot, setPressedDot] = useState(null);
 
     const translations = {
         en: {
-            Title: 'What is Emerging Market Information Gathering?',
-            Description1: 'Learn about emerging market through the help of AI.',
+            Title: 'Real-Time AI Insights for Emerging Markets',
+            Description1: 'Make smarter business moves with instant analysis of trends, risks, and regulations worldwide.',
             tryNow: 'Try now',
             introText: 'Emerging market information gathering is a key process that enables businesses to...',
             informationGathering: 'Information Gathering',
@@ -30,138 +31,92 @@ const WhatIsKiAI = () => {
             riskMitigation: 'Risk Mitigation',
             compliance: 'Compliance',
             leveragingData: 'Leveraging Data',
-            section1Title: 'Importance of Information Gathering',
+            section1Title: 'Importance of Information Gathering for Emerging Markets',
             section1Points: [
-                'Emerging markets offer huge growth potential but also high uncertainty.',
-                'Reliable, up-to-date data is crucial for making informed decisions.',
-                'Key areas to monitor: local regulations, consumer behavior, political climate.',
-                'Companies that invest in strong information networks reduce risk and gain a competitive edge.'
+                '70% of international business failures stem from inadequate market research—understanding demand, purchasing power, and market size prevents devastating financial losses.',
+                'Gathering insights on local customs, business practices, and consumer preferences ensures products and services align with market expectations.',
+                'Early intelligence gathering provides first-mover advantages and prevents entering oversaturated markets where success is unlikely.'
             ],
             section2Title: 'Improving Efficiency in Market Expansion',
             section2Content: [
-                'Expanding into new regions often takes time and resources.',
-                'Data-driven insights reduce delays and improve decision-making.',
-                'Strategies include:'
+                'Real-time access to market intelligence eliminates time delays in decision-making processes.',
+                'Analyze up to 140 countries simultaneously to identify the most promising expansion opportunities quickly.',
+                'Automated processing of vast information volumes delivers actionable insights faster than manual research.',
+                'Map existing competitors to develop winning differentiation strategies.'
             ],
-            section2Strategies: [
-                'Building partnerships with trusted local players.',
-                'Using AI tools to forecast demand.',
-                'Streamlining logistics with digital platforms.'
-            ],
-            section2Conclusion: 'Companies that act faster capture market share before competitors.',
             section3Title: 'Risk Mitigation and Cost Optimization',
             section3Content:[
-                'Emerging markets face risks:',
-                'Predictive analytics helps anticipate problems before they occur.',
-                'Cost optimization comes from:',
-                'Smart risk management leads to long-term stability.'
-            ],
-            section3Risks:[
-                'Political instability',
-                'Currency fluctuations',
-                'Supply chain disruptions',
-                'Sudden regulatory changes'
-            ],
-            section3Cost:[
-                'Identifying lower-cost suppliers',
-                'Reducing waste in operations',
-                'Preventing compliance fines'
+                'Monitor government stability and policy changes to avoid unstable markets.',
+                'Automated alerts help businesses anticipate and respond to emerging risks before they impact operations.',
+                'Analyze currency volatility and banking systems to prevent losses.'
             ],
             section4Title: 'Compliance and Regulatory Adaptation',
             section4Content:[
-                'Compliance is not optional—violations can cause major financial and reputational damage.',
-                'Each country has unique labor laws, tax policies, and industry regulations.',
-                'Key benefits of proactive compliance:'
+               'Stay updated on international & local regulations.',
+               'Tailored information delivery by country ensures businesses stay current with local legal and regulatory developments.',
+                'Research business registration, taxes, and industry regulations to avoid violations.',
+                'Understand labor laws to prevent legal disputes and shutdowns.'
             ],
-            section4Benefits: [
-                'Avoiding costly fines and penalties.',
-                'Faster government approvals',
-                'Stronger reputation with partners and customers'
-            ],
-            section4Conclusion: 'A structured compliance system ensures smooth operations in changing environments.',
             section5Title: 'Leveraging Data and AI',
             section5Content:[
-                'Advanced technologies are transforming how businesses succeed in emerging markets.',
-                'Examples:',
-                'Companies using data gain a competitive edge and can leapfrog traditional barriers.',
-                'Emerging markets often adopt technology faster, opening unique opportunities.'
+                'AI-powered analysis automatically summarizes complex information, helping users grasp key points without reading lengthy reports.',
+                'Personalized content delivery based on specific country, category, and keyword combinations.',
+                'Get real-time alerts for critical market updates.'
             ],
-            section5Examples:[
-                'AI for consumer insights and demand forecasting',
-                'Blockchain for transparent supply chains',
-                'IoT for monitoring logistics in real time'
-            ],
+            mainSectionTitle: 'Why Information Gathering',
+            mainSectionSubtitle: 'Learn why you should Gather Information for your Market',
+            kiaiTransformsTitle: "KiAI's role in all this",
+            kiaiTransformsSubtitle: 'How KiAI is Transforming Markets',
+            kiaiTransformsParagraph: 'KiAI eliminates the complexity of emerging market research through its AI-powered platform covering 147 countries with government-verified data. The system automatically processes information across 1,000+ categories, delivering personalized insights via email notifications and real-time analysis. Users can simultaneously monitor up to 40 countries, receive AI-generated summaries of complex reports, and access instant web search capabilities—replacing time-consuming manual research with reliable, actionable intelligence that enables faster, more informed business decisions in emerging markets.'
         },
         ja: {
-            Title: '新興国の情報収集とは？',
-            Description1: '「新興国情報」を3分で学ぶ',
+            Title: '新興市場向けリアルタイムAIインサイト',
+            Description1: '世界のトレンド、リスク、規制の瞬時分析でより賢明なビジネス判断を実現。',
             tryNow: '今すぐ試す',
+            introText: '新興市場における情報収集は、企業が...',
             informationGathering: '情報収集',
-            improvingEfficiency: '効率向上',
+            improvingEfficiency: '効率性の向上',
             riskMitigation: 'リスク軽減',
             compliance: 'コンプライアンス',
-            leveragingData: 'データ活用',
-            section1Title: '新興国の情報収集',
+            leveragingData: 'データとAIの活用',
+            section1Title: '情報収集の必要性',
             section1Points: [
-                '新興国は大きな成長の可能性を持つ一方、不確実性も高い市場です。',
-                '信頼できる最新情報を入手することが、正しい意思決定に不可欠です。',
-                '注視すべきポイント：現地の規制、消費者行動、政治情勢。',
-                '情報ネットワークに投資した企業は、リスクを軽減し競争優位を確立します。'
+            '国際ビジネスの失敗の70%は不十分な市場調査に起因します。需要、購買力、市場規模を理解することで壊滅的な財務損失を防げます。',
+            '地域の慣習、ビジネス慣行、消費者の好みに関する洞察を収集することで、製品とサービスが市場の期待に確実に合致します。',
+            '早期の情報収集は先行者利益をもたらし、成功の見込みが低い飽和市場への参入を防ぎます。'
             ],
-            section2Title: 'ビジネス展開の効率化',
+            section2Title: '市場拡大における効率性の向上',
             section2Content: [
-                '新規市場への展開は、多くの時間と資源を必要とします。',
-                'データ活用により、遅延を減らし、意思決定を効率化できます。',
-                '有効な戦略例：'
+            '市場インテリジェンスへのリアルタイムアクセスにより、意思決定プロセスの時間的遅延を排除します。',
+            '最大140カ国を同時に分析し、最も有望な拡大機会を迅速に特定します。',
+            '膨大な情報量の自動処理により、手動調査よりも迅速に実行可能な洞察を提供します。',
+            '既存の競合他社をマッピングして勝利する差別化戦略を開発します。'
             ],
-            section2Strategies: [
-                '信頼できる現地パートナーとの連携。',
-                '需要を予測するAIツールの活用。',
-                'デジタルプラットフォームによる物流の効率化。'
+            section3Title: 'リスク軽減とコスト最適化',
+            section3Content:[
+            '政府の安定性と政策変更を監視して不安定な市場を回避します。',
+            '自動アラートにより、企業は新興リスクが業務に影響を与える前に予測し対応できます。',
+            '通貨変動と銀行システムを分析して損失を防ぎます。'
             ],
-            section2Conclusion: '迅速に行動できる企業は、競合より先に市場シェアを獲得できます。',
-            section3Title: 'リスク低減とコスト最適化',
-            section3Content: [
-                '新興国は特有のリスクに直面しています：',
-                '予測分析により、問題が発生する前に予測できます。',
-                'コスト最適化は以下から実現されます：',
-                'スマートなリスク管理は、長期的な安定性につながります。'
+            section4Title: 'コンプライアンスと規制適応',
+            section4Content:[
+            '国際および地域の規制に関する最新情報を維持します。',
+            '国別に調整された情報配信により、企業は地域の法的・規制的動向を常に把握できます。',
+            'ビジネス登録、税務、業界規制を調査して違反を回避します。',
+            '労働法を理解して法的紛争と業務停止を防ぎます。'
             ],
-            section3Risks: [
-                '政治的不安定性',
-                '通貨の変動',
-                'サプライチェーンの混乱',
-                '突然の規制変更'
+            section5Title: 'データとAIの活用',
+            section5Content:[
+            'AI搭載分析が複雑な情報を自動要約し、長い報告書を読むことなく要点を把握できます。',
+            '特定の国、カテゴリ、キーワードの組み合わせに基づくパーソナライズされたコンテンツ配信。',
+            '重要な市場更新のリアルタイムアラートを取得します。'
             ],
-            section3Cost: [
-                '低コストのサプライヤーを特定する',
-                '業務の無駄を削減する',
-                'コンプライアンス違反を防ぐ'
-            ],
-            section4Title: 'コンプライアンスと規制対応',
-            section4Content: [
-                'コンプライアンスは任意ではありません。違反は重大な財務的および評判の損害を引き起こす可能性があります。',
-                '各国には独自の労働法、税政策、業界規制があります。',
-                'プロアクティブなコンプライアンスの主な利点：'
-            ],
-            section4Benefits: [
-                '高額な罰金や制裁を回避すること。',
-                '政府の承認を迅速化すること。',
-                'パートナーや顧客との関係を強化すること。'
-            ],
-            section4Conclusion: '構造化されたコンプライアンスシステムは、変化する環境でのスムーズな運営を確保します。',
-            section5Title: 'データ活用とAI',
-            section5Content: [
-                '先進技術が新興市場でのビジネス成功をどのように変革しているか。',
-                '事例：',
-                'データを活用する企業は競争上の優位性を得て、従来の障壁を飛び越えることができます。',
-                '新興市場はしばしば技術を迅速に採用し、独自の機会を開きます。'
-            ],
-            section5Examples: [
-                '消費者インサイトと需要予測のためのAI',
-                '透明なサプライチェーンのためのブロックチェーン',
-                'リアルタイムで物流を監視するためのIoT'
-            ],
+            mainSectionTitle: '新興市場における情報収集の重要性',
+            mainSectionSubtitle: '情報収集が必要な理由を学ぶ',
+            kiaiTransformsTitle: 'KiAIが新興市場インテリジェンスを変革する方法',
+            kiaiTransformsSubtitle: 'KiAIがこれらすべてをどのように支援するか',
+            kiaiTransformsParagraph: 'KiAIは、政府認証データを持つ147カ国をカバーするAI搭載プラットフォームを通じて新興市場調査の複雑さを排除します。システムは1,000以上のカテゴリの情報を自動処理し、メール通知とリアルタイム分析を通じてパーソナライズされた洞察を提供します。ユーザーは最大40カ国を同時監視し、複雑なレポートのAI生成要約を受信し、インスタント・ウェブ検索機能にアクセスできます—時間のかかる手動調査を、新興市場でより迅速で情報に基づいたビジネス決定を可能にする信頼性の高い実行可能なインテリジェンスに置き換えます。'
+
         },
     };
 
@@ -222,9 +177,51 @@ const WhatIsKiAI = () => {
             rootMargin: '0px 0px -10% 0px' // Trigger slightly before section is fully visible
         });
         
+        // Create observer for title sections
+        const titleObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const title = entry.target.querySelector('h1, .ki-transforms-title');
+                    const subtitle = entry.target.querySelector('.ki-section-subtitle, .ki-transforms-subtitle');
+                    
+                    if (title) {
+                        setTimeout(() => {
+                            title.classList.add('animate-in');
+                        }, 100);
+                    }
+                    
+                    if (subtitle) {
+                        setTimeout(() => {
+                            subtitle.classList.add('animate-in');
+                        }, 200);
+                    }
+                } else {
+                    const title = entry.target.querySelector('h1, .ki-transforms-title');
+                    const subtitle = entry.target.querySelector('.ki-section-subtitle, .ki-transforms-subtitle');
+                    
+                    if (title) {
+                        title.classList.remove('animate-in');
+                    }
+                    
+                    if (subtitle) {
+                        subtitle.classList.remove('animate-in');
+                    }
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -10% 0px'
+        });
+        
         // Observe all sections
         sections.forEach(section => {
             observer.observe(section);
+        });
+        
+        // Observe title sections
+        const titleSections = document.querySelectorAll('.ki-main-section-title, .ki-transforms-section');
+        titleSections.forEach(section => {
+            titleObserver.observe(section);
         });
         
         // Also handle the first section immediately if it's in view
@@ -252,11 +249,40 @@ const WhatIsKiAI = () => {
                     }
                 }
             }
+            
+            // Handle title sections immediately if in view
+            const mainTitle = document.querySelector('.ki-main-section-title');
+            const transformsTitle = document.querySelector('.ki-transforms-section');
+            
+            [mainTitle, transformsTitle].forEach(titleSection => {
+                if (titleSection) {
+                    const rect = titleSection.getBoundingClientRect();
+                    const windowHeight = window.innerHeight;
+                    
+                    if (rect.top < windowHeight * 0.8) {
+                        const title = titleSection.querySelector('h1, .ki-transforms-title');
+                        const subtitle = titleSection.querySelector('.ki-section-subtitle, .ki-transforms-subtitle');
+                        
+                        if (title) {
+                            setTimeout(() => {
+                                title.classList.add('animate-in');
+                            }, 100);
+                        }
+                        
+                        if (subtitle) {
+                            setTimeout(() => {
+                                subtitle.classList.add('animate-in');
+                            }, 200);
+                        }
+                    }
+                }
+            });
         }, 500);
 
-        // Cleanup observer on unmount
+        // Cleanup observers on unmount
         return () => {
             observer.disconnect();
+            titleObserver.disconnect();
         };
     }, []);
 
@@ -360,7 +386,7 @@ const WhatIsKiAI = () => {
                                 </ul>
                             </div>
                             <div className="ki-section-image">
-                                <img src={data} alt="Data Visualization" />
+                                <img src={map} alt="Data Visualization" />
                             </div>
                         </div>
                     </div>
@@ -370,25 +396,15 @@ const WhatIsKiAI = () => {
                     <div className="ki-section-content">
                         <h2>{t.section2Title}</h2>
                         <div className="ki-section-body">
-                            <div className="ki-section-text">
+                           <div className="ki-section-text">
                                 <ul className="ki-section-points">
                                     {t.section2Content.map((point, index) => (
-                                        <li key={index}>
-                                            {point}
-                                            {index === 2 && (
-                                                <ul className="ki-section-sub-strategies">
-                                                    {t.section2Strategies.map((strategy, strategyIndex) => (
-                                                        <li key={strategyIndex}>{strategy}</li>
-                                                    ))}
-                                                </ul>
-                                            )}
-                                        </li>
+                                        <li key={index}>{point}</li>
                                     ))}
-                                    <li>{t.section2Conclusion}</li>
                                 </ul>
                             </div>
                             <div className="ki-section-image">
-                                <img src={data} alt="Data Visualization" />
+                                <img src={business} alt="Data Visualization" />
                             </div>
                         </div>
                     </div>
@@ -401,28 +417,12 @@ const WhatIsKiAI = () => {
                             <div className="ki-section-text">
                                 <ul className="ki-section-points">
                                     {t.section3Content.map((point, index) => (
-                                        <li key={index}>
-                                            {point}
-                                            {index === 0 && (
-                                                <ul className="ki-section-sub-strategies">
-                                                    {t.section3Risks.map((risk, riskIndex) => (
-                                                        <li key={riskIndex}>{risk}</li>
-                                                    ))}
-                                                </ul>
-                                            )}
-                                            {index === 2 && (
-                                                <ul className="ki-section-sub-strategies">
-                                                    {t.section3Cost.map((cost, costIndex) => (
-                                                        <li key={costIndex}>{cost}</li>
-                                                    ))}
-                                                </ul>
-                                            )}
-                                        </li>
+                                        <li key={index}>{point}</li>
                                     ))}
                                 </ul>
                             </div>
                             <div className="ki-section-image">
-                                <img src={data} alt="Data Visualization" />
+                                <img src={risk} alt="Arrow up and Down." />
                             </div>
                         </div>
                     </div>
@@ -435,22 +435,12 @@ const WhatIsKiAI = () => {
                             <div className="ki-section-text">
                                 <ul className="ki-section-points">
                                     {t.section4Content.map((point, index) => (
-                                        <li key={index}>
-                                            {point}
-                                            {index === 2 && (
-                                                <ul className="ki-section-sub-strategies">
-                                                    {t.section4Benefits.map((benefit, benefitIndex) => (
-                                                        <li key={benefitIndex}>{benefit}</li>
-                                                    ))}
-                                                </ul>
-                                            )}
-                                        </li>
+                                        <li key={index}>{point}</li>
                                     ))}
-                                    <li>{t.section4Conclusion}</li>
                                 </ul>
                             </div>
                             <div className="ki-section-image">
-                                <img src={data} alt="Data Visualization" />
+                                <img src={law} alt="Law Justice" />
                             </div>
                         </div>
                     </div>
@@ -463,16 +453,7 @@ const WhatIsKiAI = () => {
                             <div className="ki-section-text">
                                 <ul className="ki-section-points">
                                     {t.section5Content.map((point, index) => (
-                                        <li key={index}>
-                                            {point}
-                                            {index === 1 && (
-                                                <ul className="ki-section-sub-strategies">
-                                                    {t.section5Examples.map((example, exampleIndex) => (
-                                                        <li key={exampleIndex}>{example}</li>
-                                                    ))}
-                                                </ul>
-                                            )}
-                                        </li>
+                                        <li key={index}>{point}</li>
                                     ))}
                                 </ul>
                             </div>
@@ -503,6 +484,10 @@ const WhatIsKiAI = () => {
             </div>
 
             <div className="ki-section-wrapper" ref={containerRef}>
+                <div className="ki-main-section-title">
+                    <h1>{t.mainSectionTitle}</h1>
+                    <p className="ki-section-subtitle">{t.mainSectionSubtitle}</p>
+                </div>
                 {isMobile ? (
                     // Mobile carousel view
                     <div className="ki-carousel">
@@ -534,8 +519,6 @@ const WhatIsKiAI = () => {
                                         <button
                                             className={`ki-carousel-dot ${index === currentSlide ? 'active' : ''} ${pressedDot === index ? 'pressed' : ''}`}
                                             onClick={() => handleDotClick(index)}
-                                            onMouseEnter={() => setHoveredDot(index)}
-                                            onMouseLeave={() => setHoveredDot(null)}
                                             onMouseDown={() => handleDotMouseDown(index)}
                                             onMouseUp={handleDotMouseUp}
                                             onTouchStart={() => handleDotTouchStart(index)}
@@ -566,7 +549,7 @@ const WhatIsKiAI = () => {
                                         </ul>
                                     </div>
                                     <div className="ki-section-image">
-                                        <img src={data} alt="Data Visualization" />
+                                        <img src={map} alt="Data Visualization" />
                                     </div>
                                 </div>
                             </div>
@@ -578,22 +561,12 @@ const WhatIsKiAI = () => {
                                     <div className="ki-section-text">
                                         <ul className="ki-section-points">
                                             {t.section2Content.map((point, index) => (
-                                                <li key={index}>
-                                                    {point}
-                                                    {index === 2 && (
-                                                        <ul className="ki-section-sub-strategies">
-                                                            {t.section2Strategies.map((strategy, strategyIndex) => (
-                                                                <li key={strategyIndex}>{strategy}</li>
-                                                            ))}
-                                                        </ul>
-                                                    )}
-                                                </li>
+                                                <li key={index}>{point}</li>
                                             ))}
-                                            <li>{t.section2Conclusion}</li>
                                         </ul>
                                     </div>
                                     <div className="ki-section-image">
-                                        <img src={data} alt="Data Visualization" />
+                                        <img src={business} alt="Data Visualization" />
                                     </div>
                                 </div>
                             </div>
@@ -605,28 +578,12 @@ const WhatIsKiAI = () => {
                                     <div className="ki-section-text">
                                         <ul className="ki-section-points">
                                             {t.section3Content.map((point, index) => (
-                                                <li key={index}>
-                                                    {point}
-                                                    {index === 0 && (
-                                                        <ul className="ki-section-sub-strategies">
-                                                            {t.section3Risks.map((risk, riskIndex) => (
-                                                                <li key={riskIndex}>{risk}</li>
-                                                            ))}
-                                                        </ul>
-                                                    )}
-                                                    {index === 2 && (
-                                                        <ul className="ki-section-sub-strategies">
-                                                            {t.section3Cost.map((cost, costIndex) => (
-                                                                <li key={costIndex}>{cost}</li>
-                                                            ))}
-                                                        </ul>
-                                                    )}
-                                                </li>
+                                                <li key={index}>{point}</li>
                                             ))}
                                         </ul>
                                     </div>
                                     <div className="ki-section-image">
-                                        <img src={data} alt="Data Visualization" />
+                                        <img src={risk} alt="Data Visualization" />
                                     </div>
                                 </div>
                             </div>
@@ -638,22 +595,12 @@ const WhatIsKiAI = () => {
                                     <div className="ki-section-text">
                                         <ul className="ki-section-points">
                                             {t.section4Content.map((point, index) => (
-                                                <li key={index}>
-                                                    {point}
-                                                    {index === 2 && (
-                                                        <ul className="ki-section-sub-strategies">
-                                                            {t.section4Benefits.map((benefit, benefitIndex) => (
-                                                                <li key={benefitIndex}>{benefit}</li>
-                                                            ))}
-                                                        </ul>
-                                                    )}
-                                                </li>
+                                                <li key={index}>{point}</li>
                                             ))}
-                                            <li>{t.section4Conclusion}</li>
                                         </ul>
                                     </div>
                                     <div className="ki-section-image">
-                                        <img src={data} alt="Data Visualization" />
+                                        <img src={law} alt="Data Visualization" />
                                     </div>
                                 </div>
                             </div>
@@ -665,16 +612,7 @@ const WhatIsKiAI = () => {
                                     <div className="ki-section-text">
                                         <ul className="ki-section-points">
                                             {t.section5Content.map((point, index) => (
-                                                <li key={index}>
-                                                    {point}
-                                                    {index === 1 && (
-                                                        <ul className="ki-section-sub-strategies">
-                                                            {t.section5Examples.map((example, exampleIndex) => (
-                                                                <li key={exampleIndex}>{example}</li>
-                                                            ))}
-                                                        </ul>
-                                                    )}
-                                                </li>
+                                                <li key={index}>{point}</li>
                                             ))}
                                         </ul>
                                     </div>
@@ -686,6 +624,48 @@ const WhatIsKiAI = () => {
                         </div>
                     </>
                 )}
+                
+                {/* KiAI Transforms Section */}
+                <div className="ki-transforms-section">
+                    <div className="ki-transforms-title-container">
+                    <h2 className="ki-transforms-title">{t.kiaiTransformsTitle}</h2>
+                    <p className="ki-transforms-subtitle">{t.kiaiTransformsSubtitle}</p>
+                    </div>
+                    <p className="ki-transforms-paragraph">{t.kiaiTransformsParagraph}</p>
+                </div>
+                
+                {/* Contact Form Section */}
+                <div className="ki-contact-section">
+                    <div className="ki-contact-content">
+                        <div className="ki-contact-info">
+                            <h2>Contact</h2>
+                            <p>If you have any questions or requests, please feel free to contact us using the form below.</p>
+                        </div>
+                        <div className="ki-contact-form">
+                            <form>
+                                <div className="ki-form-row">
+                                    <div className="ki-form-group">
+                                        <label htmlFor="email">Email Address</label>
+                                        <input type="email" id="email" name="email" placeholder="sample@example.com" />
+                                    </div>
+                                    <div className="ki-form-group">
+                                        <label htmlFor="name">Name / Organization</label>
+                                        <input type="text" id="name" name="name" placeholder="Yamada Corporation" />
+                                    </div>
+                                </div>
+                                <div className="ki-form-group">
+                                    <label htmlFor="subject">Subject</label>
+                                    <input type="text" id="subject" name="subject" placeholder="Subject of your inquiry" />
+                                </div>
+                                <div className="ki-form-group">
+                                    <label htmlFor="content">Content</label>
+                                    <textarea id="content" name="content" rows="6" placeholder="Inquiry details"></textarea>
+                                </div>
+                                <button type="submit" className="ki-contact-submit">Send</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

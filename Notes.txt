@@ -1,0 +1,37 @@
+Double Bullet Point Syntax
+
+
+case 3:
+                return (
+                    <div className="ki-section-content">
+                        <h2>{t.section3Title}</h2>
+                        <div className="ki-section-body">
+                            <div className="ki-section-text">
+                                <ul className="ki-section-points">
+                                    {t.section3Content.map((point, index) => (
+                                        <li key={index}>
+                                            {point}
+                                            {index === 0 && (
+                                                <ul className="ki-section-sub-strategies">
+                                                    {t.section3Risks.map((risk, riskIndex) => (
+                                                        <li key={riskIndex}>{risk}</li>
+                                                    ))}
+                                                </ul>
+                                            )}
+                                            {index === 2 && (
+                                                <ul className="ki-section-sub-strategies">
+                                                    {t.section3Cost.map((cost, costIndex) => (
+                                                        <li key={costIndex}>{cost}</li>
+                                                    ))}
+                                                </ul>
+                                            )}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div className="ki-section-image">
+                                <img src={data} alt="Data Visualization" />
+                            </div>
+                        </div>
+                    </div>
+                );
