@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect } from 'react';
+import React, { useContext, useRef, useEffect, useState } from 'react';
 import { LanguageContext } from '../../../contexts/LanguageContext';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import './WhatIsKiAI.css';
@@ -9,6 +9,10 @@ import data from './assets/Data.png';
 const WhatIsKiAI = () => {
     const { language } = useContext(LanguageContext);
     const containerRef = useRef(null);
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
+    const [touchStart, setTouchStart] = useState(null);
+    const [touchEnd, setTouchEnd] = useState(null);
 
     const translations = {
         en: {
@@ -147,6 +151,17 @@ const WhatIsKiAI = () => {
     const t = translations[language];
 
     useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    useEffect(() => {
         // Get all sections
         const sections = document.querySelectorAll('.ki-section');
         
@@ -228,20 +243,47 @@ const WhatIsKiAI = () => {
         };
     }, []);
 
-    return (
-        <div className="ki-page-content">
-            <SectionNavigation />
-            <div className="ki-main">
-                <div className="ki-main-text">
-                    <h1 className="ki-main-title">{t.Title}</h1>
-                    <div className="ki-links">
-                        <span className="ki-link-item">{t.Description1}</span>
-                    </div>
-                </div>
-            </div>
+    const nextSlide = () => {
+        setCurrentSlide((prev) => (prev + 1) % 5);
+    };
 
-            <div className="ki-section-wrapper" ref={containerRef}>
-                <div className='ki-section' id='ki-section-1'>
+    const prevSlide = () => {
+        setCurrentSlide((prev) => (prev - 1 + 5) % 5);
+    };
+
+    const goToSlide = (index) => {
+        setCurrentSlide(index);
+    };
+
+    // Touch handlers for swipe functionality
+    const handleTouchStart = (e) => {
+        setTouchEnd(null);
+        setTouchStart(e.targetTouches[0].clientX);
+    };
+
+    const handleTouchMove = (e) => {
+        setTouchEnd(e.targetTouches[0].clientX);
+    };
+
+    const handleTouchEnd = () => {
+        if (!touchStart || !touchEnd) return;
+        
+        const distance = touchStart - touchEnd;
+        const isLeftSwipe = distance > 50;
+        const isRightSwipe = distance < -50;
+
+        if (isLeftSwipe && currentSlide < 4) {
+            nextSlide();
+        }
+        if (isRightSwipe && currentSlide > 0) {
+            prevSlide();
+        }
+    };
+
+    const renderSectionContent = (sectionNumber) => {
+        switch(sectionNumber) {
+            case 1:
+                return (
                     <div className="ki-section-content">
                         <h2>{t.section1Title}</h2>
                         <div className="ki-section-body">
@@ -257,8 +299,9 @@ const WhatIsKiAI = () => {
                             </div>
                         </div>
                     </div>
-                    </div>
-                    <div className='ki-section' id='ki-section-2'>
+                );
+            case 2:
+                return (
                     <div className="ki-section-content">
                         <h2>{t.section2Title}</h2>
                         <div className="ki-section-body">
@@ -284,8 +327,9 @@ const WhatIsKiAI = () => {
                             </div>
                         </div>
                     </div>
-                    </div>
-                    <div className='ki-section' id='ki-section-3'>
+                );
+            case 3:
+                return (
                     <div className="ki-section-content">
                         <h2>{t.section3Title}</h2>
                         <div className="ki-section-body">
@@ -317,8 +361,9 @@ const WhatIsKiAI = () => {
                             </div>
                         </div>
                     </div>
-                    </div>
-                    <div className='ki-section' id='ki-section-4'>
+                );
+            case 4:
+                return (
                     <div className="ki-section-content">
                         <h2>{t.section4Title}</h2>
                         <div className="ki-section-body">
@@ -344,8 +389,9 @@ const WhatIsKiAI = () => {
                             </div>
                         </div>
                     </div>
-                    </div>
-                    <div className='ki-section' id='ki-section-5'>
+                );
+            case 5:
+                return (
                     <div className="ki-section-content">
                         <h2>{t.section5Title}</h2>
                         <div className="ki-section-body">
@@ -370,7 +416,212 @@ const WhatIsKiAI = () => {
                             </div>
                         </div>
                     </div>
+                );
+            default:
+                return null;
+        }
+    };
+
+    return (
+        <div className="ki-page-content">
+            <SectionNavigation />
+            <div className="ki-main">
+                <div className="ki-main-text">
+                    <h1 className="ki-main-title">{t.Title}</h1>
+                    <div className="ki-links">
+                        <span className="ki-link-item">{t.Description1}</span>
+                    </div>
                 </div>
+            </div>
+
+            <div className="ki-section-wrapper" ref={containerRef}>
+                {isMobile ? (
+                    // Mobile carousel view
+                    <div className="ki-carousel">
+                        <div 
+                            className="ki-carousel-container"
+                            onTouchStart={handleTouchStart}
+                            onTouchMove={handleTouchMove}
+                            onTouchEnd={handleTouchEnd}
+                        >
+                            <div 
+                                className="ki-carousel-slides" 
+                                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                            >
+                                {[1, 2, 3, 4, 5].map((sectionNumber) => (
+                                    <div key={sectionNumber} className="ki-carousel-slide">
+                                        <div className='ki-section'>
+                                            {renderSectionContent(sectionNumber)}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        {/* Carousel Navigation */}
+                        <div className="ki-carousel-nav">
+                            <button 
+                                className="ki-carousel-btn ki-carousel-prev" 
+                                onClick={prevSlide}
+                                disabled={currentSlide === 0}
+                            >
+                                ‹
+                            </button>
+                            
+                            <div className="ki-carousel-dots">
+                                {[0, 1, 2, 3, 4].map((index) => (
+                                    <button
+                                        key={index}
+                                        className={`ki-carousel-dot ${index === currentSlide ? 'active' : ''}`}
+                                        onClick={() => goToSlide(index)}
+                                    />
+                                ))}
+                            </div>
+                            
+                            <button 
+                                className="ki-carousel-btn ki-carousel-next" 
+                                onClick={nextSlide}
+                                disabled={currentSlide === 4}
+                            >
+                                ›
+                            </button>
+                        </div>
+                    </div>
+                ) : (
+                    // Desktop scroll view
+                    <>
+                        <div className='ki-section' id='ki-section-1'>
+                            <div className="ki-section-content">
+                                <h2>{t.section1Title}</h2>
+                                <div className="ki-section-body">
+                                    <div className="ki-section-text">
+                                        <ul className="ki-section-points">
+                                            {t.section1Points.map((point, index) => (
+                                                <li key={index}>{point}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    <div className="ki-section-image">
+                                        <img src={data} alt="Data Visualization" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='ki-section' id='ki-section-2'>
+                            <div className="ki-section-content">
+                                <h2>{t.section2Title}</h2>
+                                <div className="ki-section-body">
+                                    <div className="ki-section-text">
+                                        <ul className="ki-section-points">
+                                            {t.section2Content.map((point, index) => (
+                                                <li key={index}>
+                                                    {point}
+                                                    {index === 2 && (
+                                                        <ul className="ki-section-sub-strategies">
+                                                            {t.section2Strategies.map((strategy, strategyIndex) => (
+                                                                <li key={strategyIndex}>{strategy}</li>
+                                                            ))}
+                                                        </ul>
+                                                    )}
+                                                </li>
+                                            ))}
+                                            <li>{t.section2Conclusion}</li>
+                                        </ul>
+                                    </div>
+                                    <div className="ki-section-image">
+                                        <img src={data} alt="Data Visualization" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='ki-section' id='ki-section-3'>
+                            <div className="ki-section-content">
+                                <h2>{t.section3Title}</h2>
+                                <div className="ki-section-body">
+                                    <div className="ki-section-text">
+                                        <ul className="ki-section-points">
+                                            {t.section3Content.map((point, index) => (
+                                                <li key={index}>
+                                                    {point}
+                                                    {index === 0 && (
+                                                        <ul className="ki-section-sub-strategies">
+                                                            {t.section3Risks.map((risk, riskIndex) => (
+                                                                <li key={riskIndex}>{risk}</li>
+                                                            ))}
+                                                        </ul>
+                                                    )}
+                                                    {index === 2 && (
+                                                        <ul className="ki-section-sub-strategies">
+                                                            {t.section3Cost.map((cost, costIndex) => (
+                                                                <li key={costIndex}>{cost}</li>
+                                                            ))}
+                                                        </ul>
+                                                    )}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    <div className="ki-section-image">
+                                        <img src={data} alt="Data Visualization" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='ki-section' id='ki-section-4'>
+                            <div className="ki-section-content">
+                                <h2>{t.section4Title}</h2>
+                                <div className="ki-section-body">
+                                    <div className="ki-section-text">
+                                        <ul className="ki-section-points">
+                                            {t.section4Content.map((point, index) => (
+                                                <li key={index}>
+                                                    {point}
+                                                    {index === 2 && (
+                                                        <ul className="ki-section-sub-strategies">
+                                                            {t.section4Benefits.map((benefit, benefitIndex) => (
+                                                                <li key={benefitIndex}>{benefit}</li>
+                                                            ))}
+                                                        </ul>
+                                                    )}
+                                                </li>
+                                            ))}
+                                            <li>{t.section4Conclusion}</li>
+                                        </ul>
+                                    </div>
+                                    <div className="ki-section-image">
+                                        <img src={data} alt="Data Visualization" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='ki-section' id='ki-section-5'>
+                            <div className="ki-section-content">
+                                <h2>{t.section5Title}</h2>
+                                <div className="ki-section-body">
+                                    <div className="ki-section-text">
+                                        <ul className="ki-section-points">
+                                            {t.section5Content.map((point, index) => (
+                                                <li key={index}>
+                                                    {point}
+                                                    {index === 1 && (
+                                                        <ul className="ki-section-sub-strategies">
+                                                            {t.section5Examples.map((example, exampleIndex) => (
+                                                                <li key={exampleIndex}>{example}</li>
+                                                            ))}
+                                                        </ul>
+                                                    )}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    <div className="ki-section-image">
+                                        <img src={data} alt="Data Visualization" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                )}
             </div>
         </div>
     );
