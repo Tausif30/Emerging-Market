@@ -168,7 +168,7 @@ const SectionNavigation = () => {
                                 userSelect: 'none'
                             }}
                         />
-                        {hoveredDot === index && (
+                        {(hoveredDot === index || touchedDot === index) && (
                             <div className="dot-tooltip">
                                 {section.label}
                             </div>

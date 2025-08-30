@@ -6,7 +6,7 @@ import logoImage from './assets/Logo.png';
 
 // Import FontAwesome components and icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faTimes, faGlobe } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faTimes, faGlobe, faUser } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
     const { language, setLanguage } = useContext(LanguageContext);
@@ -14,6 +14,7 @@ const Header = () => {
     const [isVisible, setIsVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
 
     const translations = {
         en: {
@@ -84,6 +85,28 @@ const Header = () => {
         };
     }, [lastScrollY]);
 
+    // Handle clicks outside to close mobile menu and language dropdown
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            // Close mobile menu if clicking outside
+            if (isMobileMenuOpen && !event.target.closest('.ki-mobile-nav') && !event.target.closest('.ki-hamburger-button')) {
+                setIsMobileMenuOpen(false);
+                document.body.classList.remove('mobile-menu-open');
+            }
+            
+            // Close language dropdown if clicking outside
+            if (isLanguageDropdownOpen && !event.target.closest('.ki-mobile-language-dropdown') && !event.target.closest('.ki-desktop-language-dropdown')) {
+                setIsLanguageDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isMobileMenuOpen, isLanguageDropdownOpen]);
+
     const toggleMobileMenu = () => {
         const newMenuState = !isMobileMenuOpen;
         setIsMobileMenuOpen(newMenuState);
@@ -122,11 +145,77 @@ const Header = () => {
                         <NavLink to="/login" className="ki-login-btn">{t.login}</NavLink>
                         <NavLink to="/try-free" className="ki-try-free-btn">{t.tryFree}</NavLink>
                         
-                        {/* Language Selector Button */}
-                        <button className="ki-language-btn" onClick={() => setLanguage(language === 'en' ? 'ja' : 'en')}>
-                            <FontAwesomeIcon icon={faGlobe} />
-                            {t.currentLanguage}
-                        </button>
+                        {/* Desktop Language Selector Dropdown */}
+                        <div className="ki-desktop-language-dropdown">
+                            <button 
+                                className="ki-language-btn" 
+                                onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
+                            >
+                                <FontAwesomeIcon icon={faGlobe} />
+                                {t.currentLanguage}
+                            </button>
+                            {isLanguageDropdownOpen && (
+                                <div className="ki-language-dropdown-menu">
+                                    <button 
+                                        onClick={() => {
+                                            setLanguage('en');
+                                            setIsLanguageDropdownOpen(false);
+                                        }}
+                                        className={language === 'en' ? 'active' : ''}
+                                    >
+                                        English
+                                    </button>
+                                    <button 
+                                        onClick={() => {
+                                            setLanguage('ja');
+                                            setIsLanguageDropdownOpen(false);
+                                        }}
+                                        className={language === 'ja' ? 'active' : ''}
+                                    >
+                                        日本語
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Mobile Language Selector (outside hamburger) */}
+                    <div className="ki-mobile-only">
+                        <div className="ki-mobile-language-dropdown">
+                            <button 
+                                className="ki-mobile-language-btn" 
+                                onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
+                            >
+                                <FontAwesomeIcon icon={faGlobe} />
+                            </button>
+                            {isLanguageDropdownOpen && (
+                                <div className="ki-language-dropdown-menu">
+                                    <button 
+                                        onClick={() => {
+                                            setLanguage('en');
+                                            setIsLanguageDropdownOpen(false);
+                                        }}
+                                        className={language === 'en' ? 'active' : ''}
+                                    >
+                                        English
+                                    </button>
+                                    <button 
+                                        onClick={() => {
+                                            setLanguage('ja');
+                                            setIsLanguageDropdownOpen(false);
+                                        }}
+                                        className={language === 'ja' ? 'active' : ''}
+                                    >
+                                        日本語
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                        
+                        {/* Mobile Login Button */}
+                        <NavLink to="/login" className="ki-mobile-login-btn">
+                            <FontAwesomeIcon icon={faUser} />
+                        </NavLink>
                     </div>
 
                     {/* Mobile Hamburger */}
@@ -143,19 +232,7 @@ const Header = () => {
                     <li><NavLink to="/client" onClick={() => toggleMobileMenu()}>{t.client}</NavLink></li>
                     <li><NavLink to="/what-is-kiai" onClick={() => toggleMobileMenu()}>{t.emergingMarket}</NavLink></li>
                     <li><NavLink to="/why-kiai" onClick={() => toggleMobileMenu()}>{t.whyKiai}</NavLink></li>
-                    <li><NavLink to="/login" onClick={() => toggleMobileMenu()}>{t.login}</NavLink></li>
                     <li><NavLink to="/try-free" onClick={() => toggleMobileMenu()}>{t.tryFree}</NavLink></li>
-                    
-                    {/* Mobile Language Toggle */}
-                    <li>
-                        <button className="mobile-language-btn" onClick={() => {
-                            setLanguage(language === 'en' ? 'ja' : 'en');
-                            toggleMobileMenu();
-                        }}>
-                            <FontAwesomeIcon icon={faGlobe} />
-                            {t.currentLanguage}
-                        </button>
-                    </li>
                 </ul>
             </nav>
         </header>

@@ -200,6 +200,49 @@
     font-size: 14px;
 }
 
+/* Desktop Language Dropdown */
+.ki-desktop-language-dropdown {
+    position: relative;
+}
+
+.ki-desktop-language-dropdown .ki-language-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    min-width: 120px;
+    overflow: hidden;
+    margin-top: 4px;
+}
+
+.ki-desktop-language-dropdown .ki-language-dropdown-menu button {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    background-color: transparent;
+    color: #333333;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ki-desktop-language-dropdown .ki-language-dropdown-menu button:hover {
+    background-color: #f5f5f5;
+    color: #007bff;
+}
+
+.ki-desktop-language-dropdown .ki-language-dropdown-menu button.active {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
 /* Hamburger button */
 .ki-hamburger-button {
     display: none;
@@ -209,14 +252,20 @@
     color: #333333;
     cursor: pointer;
     padding: 8px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.ki-hamburger-button:hover {
+    background-color: #f5f5f5;
 }
 
 /* Mobile navigation */
 .ki-mobile-nav {
     display: none;
     background-color: #ffffff;
-    border-top: 1px solid #e5e5e5;
-    padding: 16px 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 0;
 }
 
 .ki-mobile-nav.open {
@@ -230,7 +279,8 @@
 }
 
 .ki-mobile-nav li {
-    margin-bottom: 16px;
+    margin: 0;
+    padding: 0;
 }
 
 .ki-mobile-nav a {
@@ -239,7 +289,19 @@
     font-size: 16px;
     font-weight: 500;
     display: block;
-    padding: 8px 0;
+    padding: 16px 24px;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.ki-mobile-nav a:hover {
+    background-color: #f5f5f5;
+    color: #007bff;
+}
+
+.ki-mobile-nav a.active {
+    color: #007bff;
+    background-color: rgba(0, 123, 255, 0.05);
 }
 
 .mobile-language-selector {
@@ -257,39 +319,109 @@
     background-color: #ffffff;
 }
 
-/* Mobile Language Button */
-.mobile-language-btn {
-    display: flex;
+/* Mobile only elements */
+.ki-mobile-only {
+    display: none;
     align-items: center;
     gap: 8px;
-    padding: 12px 16px;
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
-    background-color: #ffffff;
-    color: #333333;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    width: 100%;
-    justify-content: center;
-    margin: 8px 0;
 }
 
-.mobile-language-btn:hover {
-    border-color: #007bff;
+/* Mobile Language Dropdown */
+.ki-mobile-language-dropdown {
+    position: relative;
+}
+
+/* Mobile Language Button */
+.ki-mobile-language-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #333333;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ki-mobile-language-btn:hover {
+    background-color: #f5f5f5;
     color: #007bff;
 }
 
-.mobile-language-btn svg {
-    color: inherit;
+/* Language Dropdown Menu */
+.ki-language-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    min-width: 120px;
+    overflow: hidden;
+    margin-top: 4px;
+}
+
+.ki-language-dropdown-menu button {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    background-color: transparent;
+    color: #333333;
     font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ki-language-dropdown-menu button:hover {
+    background-color: #f5f5f5;
+    color: #007bff;
+}
+
+.ki-language-dropdown-menu button.active {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+/* Mobile Login Button */
+.ki-mobile-login-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #333333;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.ki-mobile-login-btn:hover {
+    background-color: #f5f5f5;
+    color: #007bff;
+}
+
+.ki-mobile-login-btn svg {
+    font-size: 16px;
 }
 
 /* Responsive design */
 @media (max-width: 992px) {
     .ki-desktop-only {
         display: none;
+    }
+    
+    .ki-mobile-only {
+        display: flex;
     }
     
     .ki-hamburger-button {

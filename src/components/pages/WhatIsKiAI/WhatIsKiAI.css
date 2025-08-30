@@ -136,29 +136,25 @@
 .ki-buttons {
     display: flex;
     gap: 20px;
+    justify-content: center;
 }
 
-.ki-button-blue, .ki-button-orange {
+.ki-button {
     padding: 15px 30px;
     border: none;
-    border-radius: 8px;
+    border-radius: 25px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.ki-button-blue {
-    background: #007bff;
-    color: #303436;
+.ki-button {
+    background: #333333;
+    color: white;
 }
 
-.ki-button-orange {
-    background: #ff6b35;
-    color: #303436;
-}
-
-.ki-button-blue:hover, .ki-button-orange:hover {
+.ki-button:hover{
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
@@ -170,24 +166,22 @@
     padding: 20px;
 }
 
-.ki-section {
-    position: sticky;
-    top: 20px;
-    width: 85vw;
-    max-width: 1400px;
-    margin: 0 auto 20px auto;
-    height: auto;
-    min-height: 85vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    z-index: 1;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-/* Stacked card effect - each section gets higher z-index */
+    .ki-section {
+        position: sticky;
+        top: 20px;
+        width: 85vw;
+        max-width: 1400px;
+        margin: 0 auto 20px auto;
+        height: auto;
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        z-index: 1;
+        border-radius: 20px;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
+    }/* Stacked card effect - each section gets higher z-index */
 .ki-section:nth-child(1) {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     z-index: 1;
@@ -559,7 +553,7 @@
         gap: 15px;
     }
     
-    .ki-button-blue, .ki-button-orange {
+    .ki-button {
         width: 100%;
         max-width: 250px;
         padding: 12px 24px;
@@ -692,22 +686,26 @@
     }
 
     .ki-carousel-slide {
-        width: 20%; /* 100% / 5 slides */
+        width: 20%; /* Each slide takes 20% of the total slides container */
+        min-width: 20%;
         flex-shrink: 0;
         padding: 10px;
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
+        height: 70vh; /* Fixed height for all slides */
     }
 
     .ki-carousel-slide .ki-section {
-        height: auto;
-        min-height: auto;
+        height: 100%;
+        min-height: 100%;
         padding: 15px;
         display: flex;
         flex-direction: column;
         width: 100%;
         box-sizing: border-box;
+        overflow-y: auto; /* Allow scrolling within slide if content is too long */
+        box-shadow: none; /* Remove shadow from carousel sections */
     }
 
     .ki-carousel-slide .ki-section-content {
@@ -715,6 +713,7 @@
         flex-direction: column;
         height: 100%;
         width: 100%;
+        flex: 1;
     }
 
     .ki-carousel-slide .ki-section-content h2 {
@@ -722,38 +721,65 @@
         margin-bottom: 15px;
         text-align: center;
         line-height: 1.3;
+        flex-shrink: 0;
     }
 
     .ki-carousel-slide .ki-section-body {
         flex-direction: column;
         gap: 15px;
         flex: 1;
+        display: flex;
+        overflow: hidden;
     }
 
     .ki-carousel-slide .ki-section-text {
         order: 2;
         width: 100%;
+        flex: 1;
+        overflow-y: auto;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        padding-right: 10px; /* Add padding to prevent cut-off */
     }
 
     .ki-carousel-slide .ki-section-points {
         margin: 0;
-        padding-left: 20px;
+        padding-left: 25px; /* Increased padding to show full bullets */
         font-size: 0.9rem;
         line-height: 1.4;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        list-style-type: disc !important;
+        list-style-position: outside !important;
     }
 
     .ki-carousel-slide .ki-section-points li {
         margin-bottom: 8px;
+        display: list-item !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        padding-left: 5px; /* Small padding for better spacing */
     }
 
     .ki-carousel-slide .ki-section-sub-strategies {
         margin-top: 8px;
-        padding-left: 15px;
+        padding-left: 25px; /* Increased padding to show full bullets */
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        list-style-type: disc !important; /* Changed from circle to disc */
+        list-style-position: outside !important;
     }
 
     .ki-carousel-slide .ki-section-sub-strategies li {
         margin-bottom: 5px;
         font-size: 0.85rem;
+        display: list-item !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        padding-left: 5px; /* Small padding for better spacing */
     }
 
     .ki-carousel-slide .ki-section-image {
@@ -762,6 +788,9 @@
         text-align: center;
         margin-bottom: 15px;
         flex-shrink: 0;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 
     .ki-carousel-slide .ki-section-image img {
@@ -769,11 +798,15 @@
         height: auto;
         max-height: 150px;
         object-fit: contain;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        margin: 0 auto;
     }
 
     .ki-carousel-nav {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         padding: 15px 20px;
         margin-top: 10px;
@@ -783,7 +816,7 @@
     }
 
     .ki-carousel-btn {
-        background: #007bff;
+        background: #333333;
         color: white;
         border: none;
         border-radius: 50%;
@@ -799,7 +832,7 @@
     }
 
     .ki-carousel-btn:hover:not(:disabled) {
-        background: #0056b3;
+        background: #1a1a1a;
         transform: scale(1.1);
     }
 
@@ -813,6 +846,14 @@
         display: flex;
         gap: 8px;
         align-items: center;
+        position: relative;
+    }
+
+    .ki-carousel-dot-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .ki-carousel-dot {
@@ -822,16 +863,118 @@
         border: none;
         background: #ddd;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        position: relative;
+        transform-origin: center;
     }
 
     .ki-carousel-dot.active {
-        background: #007bff;
+        background: #333333;
         transform: scale(1.2);
     }
 
     .ki-carousel-dot:hover {
-        background: #0056b3;
+        background: #1a1a1a;
+    }
+
+    /* Enhanced Fisheye effect for mobile carousel dots */
+    .ki-carousel-dots:hover .ki-carousel-dot:not(:hover) {
+        transform: scale(0.5);
+        opacity: 0.3;
+        transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .ki-carousel-dots:hover .ki-carousel-dot:not(:hover).active {
+        transform: scale(0.7);
+        opacity: 0.6;
+    }
+
+    /* Fisheye effect when dots are being pressed/held */
+    .ki-carousel-dots:has(.ki-carousel-dot.pressed) .ki-carousel-dot:not(.pressed) {
+        transform: scale(0.8);
+        opacity: 0.4;
+        transition: all 0.3s ease;
+    }
+
+    .ki-carousel-dots:has(.ki-carousel-dot.pressed) .ki-carousel-dot.pressed {
+        transform: scale(2.5);
+        background: #333333;
+        box-shadow: 0 0 15px rgba(51, 51, 51, 0.6);
+        z-index: 10;
+    }
+
+    /* Adjacent dots scaling effect for enhanced fisheye */
+    .ki-carousel-dot-wrapper:hover + .ki-carousel-dot-wrapper .ki-carousel-dot,
+    .ki-carousel-dot-wrapper:has(+ .ki-carousel-dot-wrapper:hover) .ki-carousel-dot {
+        transform: scale(0.8);
+        opacity: 0.5;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* Enhanced hover effect with 2.5x zoom */
+    .ki-carousel-dot:hover {
+        background: #333333;
+        transform: scale(2.5);
+        box-shadow: 0 0 15px rgba(51, 51, 51, 0.6);
+        z-index: 10;
+    }
+
+    /* Touch/tap effect for mobile */
+    .ki-carousel-dot:active,
+    .ki-carousel-dot.pressed {
+        background: #333333;
+        transform: scale(2.5);
+        box-shadow: 0 0 15px rgba(51, 51, 51, 0.6);
+        z-index: 10;
+    }
+
+    /* When a dot is tapped, shrink surrounding dots more */
+    .ki-carousel-dots:has(.ki-carousel-dot:active) .ki-carousel-dot:not(:active) {
+        transform: scale(0.8);
+        opacity: 0.4;
+        transition: all 0.3s ease;
+    }
+
+    /* Tooltip for carousel dots */
+    .ki-carousel-dot-tooltip {
+        position: absolute;
+        bottom: 35px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.9);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 1001;
+        opacity: 1;
+        animation: tooltipFadeInMobile 0.3s ease-out;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Arrow for tooltip */
+    .ki-carousel-dot-tooltip::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 5px solid transparent;
+        border-top-color: rgba(0, 0, 0, 0.9);
+    }
+
+    /* Mobile tooltip animation */
+    @keyframes tooltipFadeInMobile {
+        from {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
     }
 
     /* Hide desktop sections on mobile */
@@ -854,6 +997,28 @@
         text-align: center;
         margin-top: 10px;
     }
+
+    /* Override animation classes for mobile carousel */
+    .ki-carousel-slide .ki-section-text,
+    .ki-carousel-slide .ki-section-image,
+    .ki-carousel-slide .ki-section-points,
+    .ki-carousel-slide .ki-section-points li,
+    .ki-carousel-slide .ki-section-sub-strategies,
+    .ki-carousel-slide .ki-section-sub-strategies li {
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+    }
+
+    /* Ensure carousel slides are always visible */
+    .ki-carousel .ki-section-text.animate-in,
+    .ki-carousel .ki-section-image.animate-in,
+    .ki-carousel .ki-section-text,
+    .ki-carousel .ki-section-image {
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
 }
 
 /* Desktop styles - hide carousel */
@@ -861,4 +1026,34 @@
     .ki-carousel {
         display: none;
     }
+}
+
+/* Different gradient backgrounds for each carousel section */
+.ki-carousel-slide:nth-child(1) .ki-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.ki-carousel-slide:nth-child(2) .ki-section {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.ki-carousel-slide:nth-child(3) .ki-section {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.ki-carousel-slide:nth-child(4) .ki-section {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.ki-carousel-slide:nth-child(5) .ki-section {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+/* Ensure text is readable on gradient backgrounds */
+.ki-carousel-slide .ki-section h2,
+.ki-carousel-slide .ki-section-points,
+.ki-carousel-slide .ki-section-points li,
+.ki-carousel-slide .ki-section-sub-strategies li {
+    color: #333333;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.3);
 }

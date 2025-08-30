@@ -139,24 +139,7 @@
 /* Responsive Design */
 @media (max-width: 768px) {
     .dot-navigation {
-        right: 15px;
-    }
-    
-    .dots-container {
-        gap: 15px;
-    }
-    
-    .navigation-dot {
-        width: 14px;
-        height: 14px;
-        border: 2px solid rgba(0, 0, 0, 0.7);
-    }
-    
-    .dot-tooltip {
-        font-size: 13px;
-        padding: 8px 12px;
-        right: 22px;
-        background-color: rgba(0, 0, 0, 0.9);
+        display: none;
     }
 }
 

@@ -1,4 +1,5 @@
 import React, { useContext, useRef, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { LanguageContext } from '../../../contexts/LanguageContext';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import './WhatIsKiAI.css';
@@ -8,17 +9,27 @@ import data from './assets/Data.png';
 
 const WhatIsKiAI = () => {
     const { language } = useContext(LanguageContext);
+    const navigate = useNavigate();
     const containerRef = useRef(null);
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
     const [touchStart, setTouchStart] = useState(null);
     const [touchEnd, setTouchEnd] = useState(null);
+    const [showDotTooltip, setShowDotTooltip] = useState(null);
+    const [hoveredDot, setHoveredDot] = useState(null);
+    const [pressedDot, setPressedDot] = useState(null);
 
     const translations = {
         en: {
             Title: 'What is Emerging Market Information Gathering?',
             Description1: 'Learn about emerging market through the help of AI.',
+            tryNow: 'Try now',
             introText: 'Emerging market information gathering is a key process that enables businesses to...',
+            informationGathering: 'Information Gathering',
+            improvingEfficiency: 'Improving Efficiency',
+            riskMitigation: 'Risk Mitigation',
+            compliance: 'Compliance',
+            leveragingData: 'Leveraging Data',
             section1Title: 'Importance of Information Gathering',
             section1Points: [
                 'Emerging markets offer huge growth potential but also high uncertainty.',
@@ -84,6 +95,12 @@ const WhatIsKiAI = () => {
         ja: {
             Title: '新興国の情報収集とは？',
             Description1: '「新興国情報」を3分で学ぶ',
+            tryNow: '今すぐ試す',
+            informationGathering: '情報収集',
+            improvingEfficiency: '効率向上',
+            riskMitigation: 'リスク軽減',
+            compliance: 'コンプライアンス',
+            leveragingData: 'データ活用',
             section1Title: '新興国の情報収集',
             section1Points: [
                 '新興国は大きな成長の可能性を持つ一方、不確実性も高い市場です。',
@@ -253,6 +270,54 @@ const WhatIsKiAI = () => {
 
     const goToSlide = (index) => {
         setCurrentSlide(index);
+    };
+
+    const handleDotClick = (index) => {
+        if (isMobile) {
+            // Show tooltip for 2 seconds on tap
+            setShowDotTooltip(index);
+            setTimeout(() => {
+                setShowDotTooltip(null);
+            }, 2000);
+            
+            // Navigate to slide after a short delay
+            setTimeout(() => {
+                goToSlide(index);
+            }, 300);
+        } else {
+            goToSlide(index);
+        }
+    };
+
+    const handleDotMouseDown = (index) => {
+        setPressedDot(index);
+    };
+
+    const handleDotMouseUp = () => {
+        setPressedDot(null);
+    };
+
+    const handleDotTouchStart = (index) => {
+        setPressedDot(index);
+    };
+
+    const handleDotTouchEnd = () => {
+        setPressedDot(null);
+    };
+
+    const getSectionLabel = (index) => {
+        const labels = [
+            t.informationGathering,
+            t.improvingEfficiency,
+            t.riskMitigation,
+            t.compliance,
+            t.leveragingData
+        ];
+        return labels[index];
+    };
+
+    const handleTryNowClick = () => {
+        navigate('/login');
     };
 
     // Touch handlers for swipe functionality
@@ -431,6 +496,9 @@ const WhatIsKiAI = () => {
                     <div className="ki-links">
                         <span className="ki-link-item">{t.Description1}</span>
                     </div>
+                    <div className="ki-buttons">
+                        <button className="ki-button" onClick={handleTryNowClick}>{t.tryNow}</button>
+                    </div>
                 </div>
             </div>
 
@@ -446,7 +514,7 @@ const WhatIsKiAI = () => {
                         >
                             <div 
                                 className="ki-carousel-slides" 
-                                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                                style={{ transform: `translateX(-${currentSlide * 20}%)` }}
                             >
                                 {[1, 2, 3, 4, 5].map((sectionNumber) => (
                                     <div key={sectionNumber} className="ki-carousel-slide">
@@ -460,31 +528,27 @@ const WhatIsKiAI = () => {
                         
                         {/* Carousel Navigation */}
                         <div className="ki-carousel-nav">
-                            <button 
-                                className="ki-carousel-btn ki-carousel-prev" 
-                                onClick={prevSlide}
-                                disabled={currentSlide === 0}
-                            >
-                                ‹
-                            </button>
-                            
                             <div className="ki-carousel-dots">
                                 {[0, 1, 2, 3, 4].map((index) => (
-                                    <button
-                                        key={index}
-                                        className={`ki-carousel-dot ${index === currentSlide ? 'active' : ''}`}
-                                        onClick={() => goToSlide(index)}
-                                    />
+                                    <div key={index} className="ki-carousel-dot-wrapper">
+                                        <button
+                                            className={`ki-carousel-dot ${index === currentSlide ? 'active' : ''} ${pressedDot === index ? 'pressed' : ''}`}
+                                            onClick={() => handleDotClick(index)}
+                                            onMouseEnter={() => setHoveredDot(index)}
+                                            onMouseLeave={() => setHoveredDot(null)}
+                                            onMouseDown={() => handleDotMouseDown(index)}
+                                            onMouseUp={handleDotMouseUp}
+                                            onTouchStart={() => handleDotTouchStart(index)}
+                                            onTouchEnd={handleDotTouchEnd}
+                                        />
+                                        {showDotTooltip === index && (
+                                            <div className="ki-carousel-dot-tooltip">
+                                                {getSectionLabel(index)}
+                                            </div>
+                                        )}
+                                    </div>
                                 ))}
                             </div>
-                            
-                            <button 
-                                className="ki-carousel-btn ki-carousel-next" 
-                                onClick={nextSlide}
-                                disabled={currentSlide === 4}
-                            >
-                                ›
-                            </button>
                         </div>
                     </div>
                 ) : (
