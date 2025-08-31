@@ -8,6 +8,7 @@ import law from './assets/Law.png';
 import business from './assets/business_expansion.png';
 import risk from './assets/Risk.png';
 import data from './assets/Data.png';
+import market from './assets/Emerging_Market.png'
 
 const WhatIsKiAI = () => {
     const { language } = useContext(LanguageContext);
@@ -25,6 +26,7 @@ const WhatIsKiAI = () => {
             Title: 'Real-Time AI Insights for Emerging Markets',
             Description1: 'Make smarter business moves with instant analysis of trends, risks, and regulations worldwide.',
             tryNow: 'Try now',
+            learnMore: 'Learn More',
             introText: 'Emerging market information gathering is a key process that enables businesses to...',
             informationGathering: 'Information Gathering',
             improvingEfficiency: 'Improving Efficiency',
@@ -73,6 +75,7 @@ const WhatIsKiAI = () => {
             Title: '新興市場向けリアルタイムAIインサイト',
             Description1: '世界のトレンド、リスク、規制の瞬時分析でより賢明なビジネス判断を実現。',
             tryNow: '今すぐ試す',
+            learnMore: '詳細を見る',
             introText: '新興市場における情報収集は、企業が...',
             informationGathering: '情報収集',
             improvingEfficiency: '効率性の向上',
@@ -384,6 +387,16 @@ const WhatIsKiAI = () => {
                                         <li key={index}>{point}</li>
                                     ))}
                                 </ul>
+                                <div className="ki-section-button-container">
+                                    <a 
+                                        href="https://www.imf.org/external/datamapper/profile/OEMDC" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        className="ki-button"
+                                    >
+                                        {t.learnMore}
+                                    </a>
+                                </div>
                             </div>
                             <div className="ki-section-image">
                                 <img src={map} alt="Data Visualization" />
@@ -420,6 +433,16 @@ const WhatIsKiAI = () => {
                                         <li key={index}>{point}</li>
                                     ))}
                                 </ul>
+                                <div className="ki-section-button-container">
+                                    <a 
+                                        href="https://www.allianz-trade.com/en_global/economic-research/country-reports.html" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        className="ki-button"
+                                    >
+                                        {t.learnMore}
+                                    </a>
+                                </div>
                             </div>
                             <div className="ki-section-image">
                                 <img src={risk} alt="Arrow up and Down." />
@@ -547,6 +570,16 @@ const WhatIsKiAI = () => {
                                                 <li key={index}>{point}</li>
                                             ))}
                                         </ul>
+                                        <div className="ki-section-button-container">
+                                            <a 
+                                                href="https://www.imf.org/external/datamapper/profile/OEMDC" 
+                                                target="_blank" 
+                                                rel="noopener noreferrer" 
+                                                className="ki-button"
+                                            >
+                                                {t.learnMore}
+                                            </a>
+                                        </div>
                                     </div>
                                     <div className="ki-section-image">
                                         <img src={map} alt="Data Visualization" />
@@ -581,6 +614,16 @@ const WhatIsKiAI = () => {
                                                 <li key={index}>{point}</li>
                                             ))}
                                         </ul>
+                                        <div className="ki-section-button-container">
+                                            <a 
+                                                href="https://www.allianz-trade.com/en_global/economic-research/country-reports.html" 
+                                                target="_blank" 
+                                                rel="noopener noreferrer" 
+                                                className="ki-button"
+                                            >
+                                                {t.learnMore}
+                                            </a>
+                                        </div>
                                     </div>
                                     <div className="ki-section-image">
                                         <img src={risk} alt="Data Visualization" />

@@ -147,6 +147,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    text-decoration: none;
 }
 
 .ki-button {
@@ -157,6 +158,7 @@
 .ki-button:hover{
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
 }
 
 /* Simple Parallax Layout */
@@ -466,7 +468,7 @@
 }
 
 .ki-section-image {
-    flex: 0 0 300px;
+    flex: 0 0 400px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -483,10 +485,10 @@
 }
 
 .ki-section-image img {
-    width: 100%;
-    max-width: 300px;
+    width: 60vw;
+    max-width: 400px;
     height: auto;
-    max-height: 300px;
+    max-height: 400px;
     object-fit: contain;
     border-radius: 12px;
 }
@@ -586,9 +588,8 @@
 }
 
 .ki-section-image {
-    flex: 0 0 300px;
-    width: 300px;
-    max-width: 40%;
+    flex: 0 0 400px;
+    width: 60vw;
     order: 2;
     display: flex;
     align-items: center;
@@ -604,15 +605,27 @@
 }
 
 .ki-section-image img {
-    width: 100%;
+    width: 60vw;
     height: auto;
     border-radius: 8px;
-    max-width: 300px;
+    max-width: 400px;
 }
 
 .ki-section-points {
     margin: 20px 0;
     padding-left: 20px;
+}
+
+/* Section button container styling */
+.ki-section-button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.ki-section-button-container .ki-button {
+    text-decoration: none;
+    display: inline-block;
 }
 
 /* Large desktop */
@@ -912,6 +925,13 @@
         transform: translateY(0);
     }
     
+    .ki-section-image img {
+        width: 75vw;
+        height: auto;
+        object-fit: contain;
+        border-radius: 8px;
+    }
+    
     .ki-section-text h2 {
         font-size: 24px;
         margin-bottom: 15px;
@@ -963,7 +983,7 @@
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
-        height: 70vh; /* Fixed height for all slides */
+        height: 85vh; /* Fixed height for all slides */
     }
 
     .ki-carousel-slide .ki-section {
@@ -1046,7 +1066,7 @@
     }
 
     .ki-carousel-slide .ki-section-image img {
-        max-width: 60%;
+        width: 75vw;
         height: auto;
         max-height: 150px;
         object-fit: contain;
@@ -1344,47 +1364,36 @@
         margin-bottom: 0;
     }
     
-    .ki-form-group {
-        margin-bottom: 20px;
-    }
-    
-    .ki-form-group label {
-        font-size: 12px;
-        margin-left: 5px;
-        transform: translateY(6px);
-    }
-    
-    .ki-form-group input,
-    .ki-form-group textarea {
-        padding: 12px 15px;
-        font-size: 14px;
-    }
-    
-    .ki-contact-submit {
-        width: 100%;
-        padding: 12px 24px;
-        font-size: 14px;
+    /* Section button container styling for mobile */
+    .ki-section-button-container {
+        justify-content: center;
     }
 
-    /* Override animation classes for mobile carousel */
-    .ki-carousel-slide .ki-section-text,
-    .ki-carousel-slide .ki-section-image,
-    .ki-carousel-slide .ki-section-points,
-    .ki-carousel-slide .ki-section-points li {
-        transform: none !important;
-        transition: none !important;
-        animation: none !important;
+    .ki-section-button-container .ki-button {
+        width: 50vw;
+        max-width: 200px;
+        text-align: center;
     }
 
-    /* Ensure carousel slides are always visible */
-    .ki-carousel .ki-section-text.animate-in,
-    .ki-carousel .ki-section-image.animate-in,
-    .ki-carousel .ki-section-text,
-    .ki-carousel .ki-section-image {
-        transform: none !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
+/* Override animation classes for mobile carousel */
+.ki-carousel-slide .ki-section-text,
+.ki-carousel-slide .ki-section-image,
+.ki-carousel-slide .ki-section-points,
+.ki-carousel-slide .ki-section-points li {
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+}
+
+/* Ensure carousel slides are always visible */
+.ki-carousel .ki-section-text.animate-in,
+.ki-carousel .ki-section-image.animate-in,
+.ki-carousel .ki-section-text,
+.ki-carousel .ki-section-image {
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
 }
 
 /* Desktop styles - hide carousel */
