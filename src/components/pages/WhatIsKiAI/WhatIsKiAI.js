@@ -42,7 +42,7 @@ const WhatIsKiAI = () => {
             section2Title: 'Improving Efficiency in Market Expansion',
             section2Content: [
                 'Real-time access to market intelligence eliminates time delays in decision-making processes.',
-                'Analyze up to 140 countries simultaneously to identify the most promising expansion opportunities quickly.',
+                'Analyze up to 40 countries simultaneously to identify the most promising expansion opportunities quickly.',
                 'Automated processing of vast information volumes delivers actionable insights faster than manual research.',
                 'Map existing competitors to develop winning differentiation strategies.'
             ],
