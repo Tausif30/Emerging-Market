@@ -20,6 +20,9 @@ const WhatIsKiAI = () => {
     const [touchEnd, setTouchEnd] = useState(null);
     const [showDotTooltip, setShowDotTooltip] = useState(null);
     const [pressedDot, setPressedDot] = useState(null);
+    const [scrollIndicatorVisible, setScrollIndicatorVisible] = useState({
+        0: true, 1: true, 2: true, 3: true, 4: true
+    });
 
     const translations = {
         en: {
@@ -349,6 +352,17 @@ const WhatIsKiAI = () => {
         navigate('/login');
     };
 
+    // Handle scroll within carousel sections to hide/show scroll indicator
+    const handleSectionScroll = (sectionIndex) => (e) => {
+        const element = e.currentTarget;
+        const isScrolledToBottom = element.scrollHeight - element.scrollTop <= element.clientHeight + 20; // 20px threshold
+        
+        setScrollIndicatorVisible(prev => ({
+            ...prev,
+            [sectionIndex]: !isScrolledToBottom
+        }));
+    };
+
     // Touch handlers for swipe functionality
     const handleTouchStart = (e) => {
         setTouchEnd(null);
@@ -524,10 +538,20 @@ const WhatIsKiAI = () => {
                                 className="ki-carousel-slides" 
                                 style={{ transform: `translateX(-${currentSlide * 20}%)` }}
                             >
-                                {[1, 2, 3, 4, 5].map((sectionNumber) => (
+                                {[1, 2, 3, 4, 5].map((sectionNumber, index) => (
                                     <div key={sectionNumber} className="ki-carousel-slide">
-                                        <div className='ki-section'>
+                                        <div 
+                                            className='ki-section'
+                                            onScroll={handleSectionScroll(index)}
+                                        >
                                             {renderSectionContent(sectionNumber)}
+                                            <div 
+                                                className="ki-section-scroll-indicator"
+                                                style={{ opacity: scrollIndicatorVisible[index] ? 0.7 : 0 }}
+                                            >
+                                                <div className="ki-section-scroll-arrow"></div>
+                                                <div className="ki-section-scroll-text">Scroll</div>
+                                            </div>
                                         </div>
                                     </div>
                                 ))}
